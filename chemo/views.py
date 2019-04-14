@@ -7,6 +7,7 @@ from rdkit import Chem
 from rdkit.Chem import Descriptors
 from rdkit.Chem import Crippen
 from rdkit.Chem import rdMolDescriptors
+from rdkit.Chem import inchi
 
 # Model import
 from chemo.models import *
@@ -23,23 +24,40 @@ def loadSDF(sdfPath):
     suppl = Chem.SDMolSupplier(sdfPath)
     for mol in suppl:
         try:
-            # Smiles data
-            smiles = Chem.MolToSmiles(mol)
+            # pka
 
             # Formal charge
             fCharge = Chem.GetFormalCharge(mol)
 
-            # Mol weight
+            # Mol weight ???
             molMass = Descriptors.ExactMolWt(mol)
 
-            # clogp
+            # monoisotripic mass
+
+
+            # clogp ???
             clogp = Crippen.MolLogP(mol)
 
             # tpsa
             tpsa = rdMolDescriptors.CalcTPSA(mol)
 
+            # hbond
+            hbond = rdMolDescriptors.CalcNumHBA(mol)
+
+            # hbondDonnord
+            hbondDonnors = rdMolDescriptors.CalcNumHBD(mol)
+
             # rotable
             rotable = rdMolDescriptors.CalcNumRotatableBonds(mol)
+
+            # Smiles data
+            smiles = Chem.MolToSmiles(mol)
+
+            # Inchi
+            inchi = inchi.MolToInchi(mol)
+
+            # Inchi Key
+            inchiKey = inchi.MolToInchiKey(mol)
 
             print(mol.GetNumAtoms())
         except:
