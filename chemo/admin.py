@@ -10,3 +10,8 @@ admin.site.register(Orders)
 admin.site.register(OrderItems)
 admin.site.register(Merchants)
 admin.site.register(Products)
+
+admin.site.register(Molecules)
+admin.site.Properties(Products)
+admin.site.Structures(Products)
+admin.site.Figures(Products)
