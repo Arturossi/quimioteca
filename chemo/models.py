@@ -109,7 +109,7 @@ class Molecules(models.Model):
 
     # Metadata
     class Meta:
-        ordering = ('productID', 'name' ) 
+        ordering = ('moleculeID', 'name' ) 
          # helps in alphabetical listing. Sould be a tuple
 
     def __str__(self):
@@ -118,7 +118,7 @@ class Molecules(models.Model):
 
 class Properties(models.Model):
     propertyID = models.AutoField(primary_key=True)
-    moleculeID = models.ForeignKey(Molecules)
+    moleculeID = models.ForeignKey(Molecules, on_delete=models.CASCADE)
     pka = models.FloatField()
     charge = models.FloatField()
     molarMass = models.FloatField()
@@ -141,7 +141,7 @@ class Properties(models.Model):
 
 class Structures(models.Model):
     structureID = models.AutoField(primary_key=True)
-    moleculeID = models.ForeignKey(Molecules)
+    moleculeID = models.ForeignKey(Molecules, on_delete=models.CASCADE)
     smiles = models.CharField(max_length=5000)
     inChi = models.CharField(max_length=5000)
     inChiKey = models.CharField(max_length=14)
@@ -157,14 +157,14 @@ class Structures(models.Model):
 
 class Figures(models.Model):
     figureID = models.AutoField(primary_key=True)
-    moleculeID = models.ForeignKey(Molecules)
+    moleculeID = models.ForeignKey(Molecules, on_delete=models.CASCADE)
     molecule = models.CharField(max_length=5000)
     surface = models.CharField(max_length=5000)
     pka = models.FloatField()
 
     # Metadata
     class Meta:
-        ordering = ('structureID', 'moleculeID', 'smiles', 'inChi', 'inChiKey' )
+        ordering = ('figureID', 'moleculeID', 'molecule', 'surface', 'pka' )
          # helps in alphabetical listing. Sould be a tuple
 
     def __str__(self):
