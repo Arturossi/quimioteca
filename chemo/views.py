@@ -4,6 +4,9 @@ from django.conf import settings
 
 # RDkit imports
 from rdkit import Chem
+from rdkit.Chem import Descriptors
+from rdkit.Chem import Crippen
+from rdkit.Chem import rdMolDescriptors
 
 # Model import
 from chemo.models import *
@@ -11,6 +14,36 @@ from chemo.models import *
 # General imports
 import os
 import pandas as pd
+
+# Create your views here.
+
+def loadSDF(sdfPath):
+
+    # usar esse
+    suppl = Chem.SDMolSupplier(sdfPath)
+    for mol in suppl:
+        try:
+            # Smiles data
+            smiles = Chem.MolToSmiles(mol)
+
+            # Formal charge
+            fCharge = Chem.GetFormalCharge(mol)
+
+            # Mol weight
+            molMass = Descriptors.ExactMolWt(mol)
+
+            # clogp
+            clogp = Crippen.MolLogP(mol)
+
+            # tpsa
+            tpsa = rdMolDescriptors.CalcTPSA(mol)
+
+            # rotable
+            rotable = rdMolDescriptors.CalcNumRotatableBonds(mol)
+
+            print(mol.GetNumAtoms())
+        except:
+            print(-1)
 
 def updateCountries():
     # Load countries.csv
@@ -23,19 +56,6 @@ def updateCountries():
             name=row['Country'].strip(),
             continentName=row['Continent'].strip(),
         )
-
-# Create your views here.
-
-def loadSDF(sdfPath):
-
-    # usar esse
-    suppl = Chem.SDMolSupplier(sdfPath)
-    for mol in suppl:
-        try:
-            print(mol.GetNumAtoms())
-        except:
-            print(-1)
-
 
 class IndexView(generic.ListView):
     """
