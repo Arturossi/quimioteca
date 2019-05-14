@@ -89,14 +89,45 @@ def generateImages(path):
     return
 
 def feedDatabase(path):
-    datase = ['molecule name', 'total molweight', 'clogp', 'clogs', 'h-acceptors', 'h-donors',
-              'total surface area', 'polar surface area', 'mutagenic', 'tumorigenic', 'irritant',
-              'non-h atoms', 'stereo centers', 'rotatable bonds', 'Smiles', 'InChI', 'InChI-Key']
+    database = ['Molecule Name', 'Total Molweight', 'cLogP', 'cLogS', 'H-Acceptors', 'H-Donors', 'Total Surface Area',
+              'Polar Surface', 'Area', 'Mutagenic', 'Tumorigenic', 'Irritant', 'Non-H Atoms', 'Stereo Centers',
+              'Rotatable Bonds', 'Smiles', 'InChI', 'InChI-Key']
     
     generateImages(os.path.join(settings.FILES_DIR, 'GREENIDGE_APAGAR.sdf'))
     
     df = pd.read_table(os.path.join(settings.FILES_DIR, 'GREENIDGE_APAGAR.txt'), sep='\t')
     
+    for index, row in df.iterrows():
+        #for idx in index:
+        #    if idx in database:
+        objMol, createdMol = Molecules.objects.get_or_create(
+            name=row['Molecule Name'].strip(),
+        )
+
+        objProp, createdProp = Properties.objects.get_or_create(
+            pka = row[''].strip(),
+            charge = row[''].strip(),
+            molarMass = row[''].strip(),
+            monoIsotropicMass = row[''].strip(),
+            clogp = row['cLogP'].strip(),
+            tpsa = row[''].strip(),
+            lipinski = row[''].strip(),
+            hBond = row['H-Acceptors'].strip(),
+            hBondDonnors = row['H-Donors'].strip(),
+            rotatableBonds = row['Rotatable Bonds'].strip(),
+        )
+
+        objStru, createdStru = Structures.objects.get_or_create(
+                smiles = row['Smiles'].strip(),
+                inChi = row['InChI'].strip(),
+                inChiKey = row['InChI-Key'].strip(),
+        )
+
+        objFig, createdFig = Figures.objects.get_or_create(
+            molecule = row[''].strip(),
+            surface = row[''].strip(),
+            pka = row[''].strip(),
+        )
 
     return
 

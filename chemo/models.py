@@ -109,7 +109,7 @@ class Molecules(models.Model):
 
     # Metadata
     class Meta:
-        ordering = ('moleculeID', 'name' ) 
+        ordering = ('moleculeID', 'name') 
          # helps in alphabetical listing. Sould be a tuple
 
     def __str__(self):
