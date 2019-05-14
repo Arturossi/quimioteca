@@ -4,10 +4,12 @@ from django.conf import settings
 
 # RDkit imports
 from rdkit import Chem
-from rdkit.Chem import Descriptors
+from rdkit.Chem import AllChem
 from rdkit.Chem import Crippen
-from rdkit.Chem import rdMolDescriptors
+from rdkit.Chem import Descriptors
+from rdkit.Chem import Draw
 from rdkit.Chem import inchi
+from rdkit.Chem import rdMolDescriptors
 
 # Model import
 from chemo.models import *
@@ -18,7 +20,7 @@ import pandas as pd
 
 # Create your views here.
 
-def loadSDF(sdfPath):
+'''def loadSDF(sdfPath):
 
     # usar esse
     suppl = Chem.SDMolSupplier(sdfPath)
@@ -28,7 +30,10 @@ def loadSDF(sdfPath):
 
             # Formal charge
             fCharge = Chem.GetFormalCharge(mol)
-
+        except:
+        
+        try:
+            fCharge = NULL
             # Mol weight ???
             molMass = Descriptors.ExactMolWt(mol)
 
@@ -61,7 +66,39 @@ def loadSDF(sdfPath):
 
             print(mol.GetNumAtoms())
         except:
-            print(-1)
+            print(-1)'''
+
+#a - Desenho (PNG)
+#b - <Molecule Name>
+#c - <Total Molweight>
+#d - <cLogP>
+#e - <cLogS>
+#f - <Polar Surface Area>
+
+def generateImages(path):
+    sdf = Chem.SDMolSupplier(path)#'GREENIDGE_APAGAR.sdf')
+    ms = [x for x in sdf if x is not None]
+
+    for m in ms:
+        tmp=AllChem.Compute2DCoords(m)
+
+    for i in range(len(ms)) :
+        name=ms[i].GetProp('_Name')
+        Draw.MolToFile(ms[i], os.path.join(settings.FILES_DIR, f'molImages/{name}.png'))
+    
+    return
+
+def feedDatabase(path):
+    datase = ['molecule name', 'total molweight', 'clogp', 'clogs', 'h-acceptors', 'h-donors',
+              'total surface area', 'polar surface area', 'mutagenic', 'tumorigenic', 'irritant',
+              'non-h atoms', 'stereo centers', 'rotatable bonds', 'Smiles', 'InChI', 'InChI-Key']
+    
+    generateImages(os.path.join(settings.FILES_DIR, 'GREENIDGE_APAGAR.sdf'))
+    
+    df = pd.read_table(os.path.join(settings.FILES_DIR, 'GREENIDGE_APAGAR.txt'), sep='\t')
+    
+
+    return
 
 def updateCountries():
     # Load countries.csv
