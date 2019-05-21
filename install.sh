@@ -5,7 +5,7 @@
 #   install them
 #
 
-channels = $(conda config --get channels)
+channels=$(conda config --get channels)
 
 if [[ $channels != *"--add channels 'conda-forge'"* ]]; then
   conda config --add channels 'conda-forge'
