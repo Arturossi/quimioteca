@@ -153,7 +153,27 @@ class IndexView(generic.ListView):
         Get function to the class
         """
 
-        loadSDF(os.path.join(settings.FILES_DIR, 'ApprovedDrugs2015.sdf'))
+        #loadSDF(os.path.join(settings.FILES_DIR, 'ApprovedDrugs2015.sdf'))
 
         # Render page index.html within the request and variables
         return render(request, 'chemo/index.html', {'countries': updateCountries()})
+
+class compoundView(generic.ListView):
+    def get(self, request, **kwargs):
+        return render(request, 'chemo/compound.html')
+
+class aboutView(generic.ListView):
+    def get(self, request, **kwargs):
+        return render(request, 'chemo/about.html')
+
+class contactUsView(generic.ListView):
+    def get(self, request, **kwargs):
+        return render(request, 'chemo/contactUs.html')
+
+class loginView(generic.ListView):
+    def get(self, request, **kwargs):
+        return render(request, 'chemo/login.html')
+
+class quimiotecaDatabaseView(generic.ListView):
+    def get(self, request, **kwargs):
+        return render(request, 'chemo/quimiotecaDatabase.html')
