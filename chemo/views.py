@@ -243,5 +243,5 @@ class quimiotecaDatabaseView(generic.ListView):
             'mols': mols,
         }
 
-        #return render(request, 'chemo/quimiotecaDatabase.html', variables)
-        return render(request, 'chemo/quimiotecaDatabase.html')
+        return render(request, 'chemo/quimiotecaDatabase.html', variables)
+        #return render(request, 'chemo/quimiotecaDatabase.html')

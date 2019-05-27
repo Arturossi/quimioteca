@@ -67,9 +67,53 @@
       </div>
     </div>
   </div>
-  <div class="pb-3" style="">
-    <div class="container">
-      <div class="row">
+  <!-- <div class="pb-3" style=""> -->
+    <!-- <div class="container"> -->
+            <h1>Compostos</h1>
+            <table border="1" width="600">
+                <tr>
+                    <td>Molecule Name</td>
+                    <td>Total Molweight</td>
+                    <td>cLogP</td>
+                    <td>cLogS</td>
+                    <td>H-Acceptors</td>
+                    <td>H-Donors</td>
+                    <td>Total Surface Area</td>
+                    <td>Polar Surface Area</td>
+                    <td>Mutagenic</td>
+                    <td>Tumorigenic</td>
+                    <td>Irritant</td>
+                    <td>Non-H Atoms</td>
+                    <td>Stereo Centers</td>
+                    <td>Rotatable Bonds</td>
+                    <td>Smiles</td>
+                    <td>InChI</td>
+                    <td>InChI-Key</td>
+                </tr>
+
+                {% for mol in mols %}
+                <tr>
+                    <td>{{ mol.moleculeName }}</td>
+                    <td>{{ mol.totalMolweight }}</td>
+                    <td>{{ mol.cLogP }}</td>
+                    <td>{{ mol.cLogS }}</td>
+                    <td>{{ mol.hAcceptors }}</td>
+                    <td>{{ mol.hDonors }}</td>
+                    <td>{{ mol.totalSurfaceArea }}</td>
+                    <td>{{ mol.polarSurfaceArea }}</td>
+                    <td>{{ mol.mutagenic }}</td>
+                    <td>{{ mol.tumorigenic }}</td>
+                    <td>{{ mol.irritant }}</td>
+                    <td>{{ mol.nonHAtoms }}</td>
+                    <td>{{ mol.stereoCenters }}</td>
+                    <td>{{ mol.rotatableBonds }}</td>
+                    <td>{{ mol.smiles }}</td>
+                    <td>{{ mol.inChI }}</td>
+                    <td>{{ mol.inChIKey }}</td>
+                </tr>
+                {% endfor %}
+                </table>
+      <!-- <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4 border border-secondary">
           <h3 class="border-secondary">Massa Molar</h3>
@@ -109,9 +153,9 @@
           <h3 class="">Solubilidade</h3>
         </div>
         <div class="col-md-4"></div>
-      </div>
-    </div>
-  </div>
+      </div> -->
+    <!-- </div> -->
+  <!-- </div> -->
   <!-- Speakers -->
   <!-- Schedule -->
   <!-- Sponsor logos -->
