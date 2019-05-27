@@ -15,3 +15,5 @@ admin.site.register(Molecules)
 admin.site.register(Properties)
 admin.site.register(Structures)
 admin.site.register(Figures)
+
+admin.site.register(Compounds)

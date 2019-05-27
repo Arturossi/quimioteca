@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
 from django.conf import settings
 
@@ -16,7 +16,13 @@ from chemo.models import *
 
 # General imports
 import os
+import json
+import logging
+
 import pandas as pd
+
+# Logger to log
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 
@@ -88,14 +94,68 @@ def generateImages(path):
     
     return
 
-def feedDatabase(path):
-    database = ['Molecule Name', 'Total Molweight', 'cLogP', 'cLogS', 'H-Acceptors', 'H-Donors', 'Total Surface Area',
-              'Polar Surface', 'Area', 'Mutagenic', 'Tumorigenic', 'Irritant', 'Non-H Atoms', 'Stereo Centers',
+def csv2json(request, path='GREENIDGE_APAGAR', separator='\t'):
+    generateImages(os.path.join(settings.FILES_DIR, str(path) + ".sdf"))
+    
+    df = pd.read_csv(os.path.join(settings.FILES_DIR, str(path) + ".txt"), sep=separator)
+    df2 = df.drop(['Structure [idcode]', 'Unnamed: 18'], axis=1)
+    df2.to_json(os.path.join(settings.FILES_DIR, str(path) + ".json"))
+
+    return render(request, 'chemo/quimiotecaDatabase.html')
+
+def readjson(path='GREENIDGE_APAGAR'):
+    fullPath = os.path.join(settings.FILES_DIR, str(path) + ".json")
+    data = json.load(fullPath)
+
+    return data
+
+def feedDatabase(request, path='GREENIDGE_APAGAR', separator='\t'):
+    '''
+        Feeds the postgreesql database with data from provided path as input.
+
+        VARIABLES:
+            - path [string]: Path to file to be read with pandas (format of file should be csv like).
+            - separator [string]: Key to perform the split in pandas library.
+    '''
+    
+    generateImages(os.path.join(settings.FILES_DIR, str(path) + ".sdf"))
+
+    df = pd.read_csv(os.path.join(settings.FILES_DIR, str(path) + ".txt"), dtype=str, sep=separator)
+    df = df.drop(['Structure [idcode]', 'Unnamed: 18'], axis=1)
+    
+    for index, row in df.iterrows():
+        try:
+            obj, created = Compounds.objects.get_or_create(
+                moleculeName = row['Molecule Name'].strip(),
+                totalMolweight = float(row['Total Molweight']),
+                cLogP = float(row['cLogP']),
+                cLogS = float(row['cLogS']),
+                hAcceptors = int(row['H-Acceptors']),
+                hDonors = int(row['H-Donors']),
+                totalSurfaceArea = float(row['Total Surface Area']),
+                polarSurfaceArea = float(row['Polar Surface Area']),
+                mutagenic = row['Mutagenic'].strip(),
+                tumorigenic = row['Tumorigenic'].strip(),
+                irritant = row['Irritant'].strip(),
+                nonHAtoms = int(row['Non-H Atoms']),
+                stereoCenters = int(row['Stereo Centers']),
+                rotatableBonds = int(row['Rotatable Bonds']),
+                smiles = row['Smiles'].strip(),
+                inChI = row['InChI'].strip(),
+                inChIKey = row['InChI-Key'].strip(),
+            )
+        except:
+            logger.warn("The molecule " + row['Molecule Name'].strip() + " is experiencig some problems, skipping it.")
+
+#region otherdatabase
+    '''database = ['Molecule Name', 'Total Molweight', 'cLogP', 'cLogS', 'H-Acceptors', 'H-Donors', 'Total Surface Area',
+              'Polar Surface Area', 'Mutagenic', 'Tumorigenic', 'Irritant', 'Non-H Atoms', 'Stereo Centers',
               'Rotatable Bonds', 'Smiles', 'InChI', 'InChI-Key']
     
-    generateImages(os.path.join(settings.FILES_DIR, 'GREENIDGE_APAGAR.sdf'))
+    generateImages(os.path.join(settings.FILES_DIR, str(path) + ".sdf"))
     
-    df = pd.read_table(os.path.join(settings.FILES_DIR, 'GREENIDGE_APAGAR.txt'), sep='\t')
+    df = pd.read_table(os.path.join(settings.FILES_DIR, str(path) + ".txt"), sep=separator)
+    df = df.drop(['Structure [idcode]', 'Unnamed: 18'], axis=1)
     
     for index, row in df.iterrows():
         #for idx in index:
@@ -105,18 +165,19 @@ def feedDatabase(path):
         )
 
         objProp, createdProp = Properties.objects.get_or_create(
-            pka = row[''].strip(),
-            charge = row[''].strip(),
-            molarMass = row[''].strip(),
-            monoIsotropicMass = row[''].strip(),
-            clogp = row['cLogP'].strip(),
-            tpsa = row[''].strip(),
-            lipinski = row[''].strip(),
-            hBond = row['H-Acceptors'].strip(),
-            hBondDonnors = row['H-Donors'].strip(),
-            rotatableBonds = row['Rotatable Bonds'].strip(),
+            pka = 0.0,#row[''],
+            charge = 0.0,#row[''],
+            molarMass = 0.0,#row[''],
+            monoIsotropicMass = 0.0,#$row[''],
+            clogp = row['cLogP'],
+            tpsa = 0.0,#row[''],
+            lipinski = 0,#row[''],
+            hBond = row['H-Acceptors'],
+            hBondDonnors = row['H-Donors'],
+            rotatableBonds = row['Rotatable Bonds'],
+            moleculeID = row['Molecule Name'].strip(),
         )
-
+        
         objStru, createdStru = Structures.objects.get_or_create(
                 smiles = row['Smiles'].strip(),
                 inChi = row['InChI'].strip(),
@@ -124,12 +185,12 @@ def feedDatabase(path):
         )
 
         objFig, createdFig = Figures.objects.get_or_create(
-            molecule = row[''].strip(),
-            surface = row[''].strip(),
-            pka = row[''].strip(),
-        )
-
-    return
+            molecule = 'xxx',#row[''].strip(),
+            surface = 'xxx',#row[''].strip(),
+            pka = 'xxx',#row[''],
+        )'''
+#endregion
+    return redirect('/quimiotecaDatabase')#render(request, 'chemo/quimiotecaDatabase.html')
 
 def updateCountries():
     # Load countries.csv
@@ -176,4 +237,11 @@ class loginView(generic.ListView):
 
 class quimiotecaDatabaseView(generic.ListView):
     def get(self, request, **kwargs):
+        mols = Compounds.objects.all()
+
+        variables = {
+            'mols': mols,
+        }
+
+        #return render(request, 'chemo/quimiotecaDatabase.html', variables)
         return render(request, 'chemo/quimiotecaDatabase.html')

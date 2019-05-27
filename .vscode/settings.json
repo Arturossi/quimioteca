@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/home/ligmol/anaconda3/envs/chemdb/bin/python"
+    "python.pythonPath": "/home/ligmol/anaconda3/envs/chemdb/bin/python",
+    "restructuredtext.confPath": ""
 }

@@ -14,3 +14,9 @@ urlpatterns = [
     path('login', views.loginView.as_view(), name='login'),
     path('quimiotecaDatabase', views.quimiotecaDatabaseView.as_view(), name='quimiotecaDatabase'),
 ]
+
+noviewsurls = [
+    path('updateDatabase', views.feedDatabase, name='updateDatabase'),
+]
+
+urlpatterns = urlpatterns + noviewsurls
