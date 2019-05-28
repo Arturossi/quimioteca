@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.views import generic
 
@@ -236,10 +238,39 @@ class loginView(generic.ListView):
 
 class quimiotecaDatabaseView(generic.ListView):
     def get(self, request, **kwargs):
+
         mols = Compounds.objects.all()
+
+        counter = mols.count()
+
+        elements = 10
+
+        if request.method == 'GET':
+            if 'page' in request.GET:
+                try:
+                    page = int(request.GET.get('page'))
+                except:
+                    page = 1
+                
+                if not page or page < 1 or page > (int(counter) / elements + 1):
+                    page = 1
+            else:
+                page = 1
+            
+        else:
+            page = 1
+
+        paginator = Paginator(mols, elements)
+        mols = paginator.page(page)
+
+        nextpage = page + 1
+        previouspage = page - 1
 
         variables = {
             'mols': mols,
+            'page': page,
+            'next': nextpage,
+            'previous': previouspage,
         }
 
         return render(request, 'chemo/quimiotecaDatabase.html', variables)
