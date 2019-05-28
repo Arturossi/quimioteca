@@ -124,11 +124,11 @@ STATIC_URL = '/static/'
 
 FILES_DIR = os.path.abspath(os.path.join(BASE_DIR, './data/'))
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, "complexTable/static"),
     ("data", os.path.join(BASE_DIR, "data/")),
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')

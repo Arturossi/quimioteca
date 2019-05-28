@@ -68,10 +68,12 @@
     </div>
   </div>
   <!-- <div class="pb-3" style=""> -->
-    <!-- <div class="container"> -->
-            <h1>Compostos</h1>
-            <table border="1" width="600">
+    <div style="margin: 5px 80px 5px 80px">
+        <h1>Compostos</h1>
+        <div class="table-responsive">
+            <table border="1" class="table table-striped table-bordered table-info">
                 <tr>
+                    <td></td>
                     <td>Molecule Name</td>
                     <td>Total Molweight</td>
                     <td>cLogP</td>
@@ -86,13 +88,16 @@
                     <td>Non-H Atoms</td>
                     <td>Stereo Centers</td>
                     <td>Rotatable Bonds</td>
-                    <td>Smiles</td>
+                    <!-- <td>Smiles</td>
                     <td>InChI</td>
-                    <td>InChI-Key</td>
+                    <td>InChI-Key</td> -->
                 </tr>
 
                 {% for mol in mols %}
                 <tr>
+                    {% with image_static="data/molImages/"|add:mol.moleculeName|add:".png" %}
+                        <td><img src="{% static image_static %}"></td>
+                    {% endwith %}
                     <td>{{ mol.moleculeName }}</td>
                     <td>{{ mol.totalMolweight }}</td>
                     <td>{{ mol.cLogP }}</td>
@@ -107,12 +112,14 @@
                     <td>{{ mol.nonHAtoms }}</td>
                     <td>{{ mol.stereoCenters }}</td>
                     <td>{{ mol.rotatableBonds }}</td>
-                    <td>{{ mol.smiles }}</td>
+                    <!-- <td>{{ mol.smiles }}</td>
                     <td>{{ mol.inChI }}</td>
-                    <td>{{ mol.inChIKey }}</td>
+                    <td>{{ mol.inChIKey }}</td> -->
                 </tr>
                 {% endfor %}
-                </table>
+            </table>
+        </div>
+    </div>
       <!-- <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4 border border-secondary">
