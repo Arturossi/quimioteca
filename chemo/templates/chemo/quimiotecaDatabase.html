@@ -172,7 +172,7 @@
                 {% endfor %}
             </table>
         </div>
-        <span class="float-right">Exibindo resultados: {{ starting }} a {{ ending }} de {{ count }}</span>
+        <br />
         <br />
         <div class="float-right" style="margin: 10 10 10 10">
             <span style="display: inline-block">Mostrar </span>
@@ -194,6 +194,9 @@
             </div>
             <span style="display: inline-block"> resultados por página.</span>
         </div>
+        <br />
+        <span class="float-right">Exibindo resultados: {{ starting }} a {{ ending }} de {{ count }}</span>
+        <br />
         <div>
             <span style="font-size: 0.5rem;">
                 <a href="quimiotecaDatabase?page=1&elements={{ elements }}">
