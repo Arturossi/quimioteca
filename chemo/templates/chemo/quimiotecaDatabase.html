@@ -85,7 +85,8 @@
                     <i class="fa fa-angle-double-left fa-3x" title="Primeira página" style="font-weight: bold"></i>
                 </a>
                 &nbsp;
-                <a {% if previous < 1 %}disabled="True"{% else %}href="quimiotecaDatabase?page={{ previous }}&elements={{ elements }}"{% endif %}>
+                <a {% if previous < 1 %}disabled="True"
+                    {% else %}href="quimiotecaDatabase?page={{ previous }}&elements={{ elements }}" {% endif %}>
                     <i class="fa fa-angle-left fa-3x" title="Página anterior" style="font-weight: bold"></i>
                 </a>
             </span>
@@ -96,7 +97,8 @@
                 &nbsp;
             </span>
             <span style="font-size: 0.5rem;">
-                <a {% if next < endpage %}href="quimiotecaDatabase?page={{ next }}&elements={{ elements }}"{% else %}disabled="True"{% endif %}>
+                <a {% if next < endpage %}href="quimiotecaDatabase?page={{ next }}&elements={{ elements }}"
+                    {% else %}disabled="True" {% endif %}>
                     <i class="fa fa-angle-right fa-3x" title="Próxima página" style="font-weight: bold"></i>
                 </a>
                 &nbsp;
@@ -172,13 +174,34 @@
         </div>
         <span class="float-right">Exibindo resultados: {{ starting }} a {{ ending }} de {{ count }}</span>
         <br />
+        <div class="float-right" style="margin: 10 10 10 10">
+            <span style="display: inline-block">Mostrar </span>
+            <div class="dropdown" style="display: inline-block">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ elements }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <button class="dropdown-item" type="button"
+                        onclick="window.location.replace('quimiotecaDatabase?page={{ page }}&elements=10')">10</button>
+                    <button class="dropdown-item" type="button"
+                        onclick="window.location.replace('quimiotecaDatabase?page={{ page }}&elements=25')">25</button>
+                    <button class="dropdown-item" type="button"
+                        onclick="window.location.replace('quimiotecaDatabase?page={{ page }}&elements=50')">50</button>
+                    <button class="dropdown-item" type="button"
+                        onclick="window.location.replace('quimiotecaDatabase?page={{ page }}&elements=100')">100</button>
+                </div>
+            </div>
+            <span style="display: inline-block"> resultados por página.</span>
+        </div>
         <div>
             <span style="font-size: 0.5rem;">
                 <a href="quimiotecaDatabase?page=1&elements={{ elements }}">
                     <i class="fa fa-angle-double-left fa-3x" title="Primeira página" style="font-weight: bold"></i>
                 </a>
                 &nbsp;
-                <a {% if previous < 1 %}disabled="True"{% else %}href="quimiotecaDatabase?page={{ previous }}&elements={{ elements }}"{% endif %}>
+                <a {% if previous < 1 %}disabled="True"
+                    {% else %}href="quimiotecaDatabase?page={{ previous }}&elements={{ elements }}" {% endif %}>
                     <i class="fa fa-angle-left fa-3x" title="Página anterior" style="font-weight: bold"></i>
                 </a>
             </span>
@@ -189,7 +212,8 @@
                 &nbsp;
             </span>
             <span style="font-size: 0.5rem;">
-                <a {% if next < endpage %}href="quimiotecaDatabase?page={{ next }}&elements={{ elements }}"{% else %}disabled="True"{% endif %}>
+                <a {% if next < endpage %}href="quimiotecaDatabase?page={{ next }}&elements={{ elements }}"
+                    {% else %}disabled="True" {% endif %}>
                     <i class="fa fa-angle-right fa-3x" title="Próxima página" style="font-weight: bold"></i>
                 </a>
                 &nbsp;
