@@ -28,6 +28,7 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 
+# Function to load and parse .sdf files into database [UNFINISHED]
 '''def loadSDF(sdfPath):
 
     # usar esse
@@ -76,30 +77,34 @@ logger = logging.getLogger(__name__)
         except:
             print(-1)'''
 
-#a - Desenho (PNG)
-# b - <Molecule Name>
-# c - <Total Molweight>
-# d - <cLogP>
-# e - <cLogS>
-# f - <Polar Surface Area>
-
-
 def generateImages(path):
-    sdf = Chem.SDMolSupplier(path)  # 'GREENIDGE_APAGAR.sdf')
-    ms = [x for x in sdf if x is not None]
+    '''
+        From a .sdf file, generate images and save them in data/molImages/ being filename the name of the molecule and the format of the image .png
 
-    for m in ms:
-        tmp = AllChem.Compute2DCoords(m)
+        VARIABLES:
+            - path [string]: Path to .sdf file
+    '''
+    
+    sdf = Chem.SDMolSupplier(path) # Load sdf file
 
-    for i in range(len(ms)):
-        name = ms[i].GetProp('_Name')
+    ms = [x for x in sdf if x is not None] # Filter empty entries
+
+    # Not sure about the need of this piece of code VVVV
+
+    for m in ms: # For each element in list
+        tmp = AllChem.Compute2DCoords(m) # Compute its coordinates
+
+    # Not sure about the need of this piece of code ^^^^
+
+    for i in range(len(ms)): # Iterate over all elements
+        name = ms[i].GetProp('_Name') # Get molecule name
         Draw.MolToFile(ms[i], os.path.join(
-            settings.FILES_DIR, f'molImages/{name}.png'))
+            settings.FILES_DIR, f'molImages/{name}.png')) # Save it
 
     return
 
 
-def csv2json(request, path='GREENIDGE_APAGAR', separator='\t'):
+'''def csv2json(request, path='GREENIDGE_APAGAR', separator='\t'):
     generateImages(os.path.join(settings.FILES_DIR, str(path) + ".sdf"))
 
     df = pd.read_csv(os.path.join(settings.FILES_DIR,
@@ -114,7 +119,7 @@ def readjson(path='GREENIDGE_APAGAR'):
     fullPath = os.path.join(settings.FILES_DIR, str(path) + ".json")
     data = json.load(fullPath)
 
-    return data
+    return data'''
 
 
 def feedDatabase(request, path='GREENIDGE_APAGAR', separator='\t'):
@@ -126,14 +131,21 @@ def feedDatabase(request, path='GREENIDGE_APAGAR', separator='\t'):
             - separator [string]: Key to perform the split in pandas library.
     '''
 
-    generateImages(os.path.join(settings.FILES_DIR, str(path) + ".sdf"))
+    generateImages(os.path.join(settings.FILES_DIR, str(path) + ".sdf")) # Create images for all elements
 
-    df = pd.read_csv(os.path.join(settings.FILES_DIR, str(
-        path) + ".txt"), dtype=str, sep=separator)
-    df = df.drop(['Structure [idcode]', 'Unnamed: 18'], axis=1)
+    df = pd.read_csv(
+            os.path.join(settings.FILES_DIR,
+            str(path) + ".txt"),
+            dtype=str,
+            sep=separator
+        ) # Parse all elements into a dataframe with pandas
+    df = df.drop(
+            ['Structure [idcode]', 'Unnamed: 18'],
+            axis=1
+        ) # Remove useless columns
 
-    for index, row in df.iterrows():
-        try:
+    for index, row in df.iterrows(): # For each element in dataframe
+        try: # Try to parse (this avoid those badly filled entries e.g.: half empties)
             obj, created = Compounds.objects.get_or_create(
                 moleculeName=row['Molecule Name'].strip(),
                 totalMolweight=float(row['Total Molweight']),
@@ -152,12 +164,12 @@ def feedDatabase(request, path='GREENIDGE_APAGAR', separator='\t'):
                 smiles=row['Smiles'].strip(),
                 inChI=row['InChI'].strip(),
                 inChIKey=row['InChI-Key'].strip(),
-            )
+            ) # Try to fetch elements, if fails insert elements into database (make database unique)
         except:
             logger.warn("The molecule " + row['Molecule Name'].strip() +
-                        " is experiencig some problems, skipping it.")
+                        " is experiencig some problems, skipping it.") # Show a warning
 
-# region otherdatabase
+# region otherdatabase (to fill the other models) [UNFINISHED]
     '''database = ['Molecule Name', 'Total Molweight', 'cLogP', 'cLogS', 'H-Acceptors', 'H-Donors', 'Total Surface Area',
               'Polar Surface Area', 'Mutagenic', 'Tumorigenic', 'Irritant', 'Non-H Atoms', 'Stereo Centers',
               'Rotatable Bonds', 'Smiles', 'InChI', 'InChI-Key']
@@ -205,6 +217,10 @@ def feedDatabase(request, path='GREENIDGE_APAGAR', separator='\t'):
 
 
 def updateCountries():
+    '''
+        Update the Countries table in database from file in 'database/countries/countries.csv' path
+    '''
+
     # Load countries.csv
     countries = pd.read_csv(os.path.join(
         settings.FILES_DIR, 'database/countries/countries.csv'))
@@ -235,60 +251,111 @@ class IndexView(generic.ListView):
 
 
 class compoundView(generic.ListView):
+    """
+    Class to work with compound.html template
+    """
+
     def get(self, request, **kwargs):
+        """
+        Get function to the class
+        """
+
         return render(request, 'chemo/compound.html')
 
 
 class aboutView(generic.ListView):
+    """
+    Class to work with about.html template
+    """
+
     def get(self, request, **kwargs):
+        """
+        Get function to the class
+        """
+
         return render(request, 'chemo/about.html')
 
 
 class contactUsView(generic.ListView):
+    """
+    Class to work with contactUs.html template
+    """
+
     def get(self, request, **kwargs):
+        """
+        Get function to the class
+        """
+
         return render(request, 'chemo/contactUs.html')
 
 
 class loginView(generic.ListView):
+    """
+    Class to work with login.html template
+    """
+
     def get(self, request, **kwargs):
+        """
+        Get function to the class
+        """
+
         return render(request, 'chemo/login.html')
 
 
 class quimiotecaDatabaseView(generic.ListView):
+    """
+    Class to work with quimiotecaDatabase.html template
+    """
+
     def get(self, request, **kwargs):
+        """
+        Get function to the class
+        """
 
-        mols = Compounds.objects.all()
+        mols = Compounds.objects.all() # Read database
 
-        count = mols.count()
+        count = mols.count() # Count number of elements on it
 
-        elements = 10
-
-        if request.method == 'GET':
-            if 'page' in request.GET:
+        if request.method == 'GET': # If there is any GET response
+            if 'elements' in request.GET: # If in GET a 'elements' field has been passed
                 try:
-                    page = int(request.GET.get('page'))
+                    elements = int(request.GET.get('elements')) # Try to parse its value to int (it comes as string, and if it fails, it is an invalid value)
+
+                    if not elements or elements not in [10, 25, 50, 100]: # If elements are not one of those in list (avoid the get injection)
+                        elements = 10 # Set elements to default value
                 except:
-                    page = 1
-
-                if not page or page < 1 or page > (int(count) / elements + 1):
-                    page = 1
+                    elements = 10 # Set elements to default value
             else:
-                page = 1
+                elements = 10 # Set elements to default value
 
+            if 'page' in request.GET: # If in GET a 'page' field has been passed
+                try: 
+                    page = int(request.GET.get('page')) # Try to parse its value to int (it comes as string, and if it fails, it is an invalid value)
+
+                    if not page or page < 1 or page > (int(count) / elements + 1): # If page are not accepted range (avoid the get injection or type error)
+                        page = 1 # Set page to default value
+                except:
+                    page = 1 # Set page to default value
+            else:
+                page = 1 # Set page to default value
         else:
-            page = 1
+            page = 1 # Set page to default value
+            elements = 10 # Set elements to default value
 
-        paginator = Paginator(mols, elements)
-        mols = paginator.page(page)
+        paginator = Paginator(mols, elements) # Make the pages
+        mols = paginator.page(page) # Set the page
 
-        nextpage = page + 1
-        previouspage = page - 1
+        nextpage = page + 1 # Value to be put in next '>' button
+        previouspage = page - 1 # Value to be put in previous '<' button
 
-        starting = (page-1)*elements + 1
-        ending = page*elements
+        starting = (page-1)*elements + 1 # Starting element in table
 
+        ending = page*elements # Ending element in table
 
-        endpage = math.ceil(count/10)
+        if ending > count: # Check if the last element is higher than the size of database
+            ending = count # Correct the issue
+
+        endpage = math.ceil(count/elements) # Calculate how many pages we have
 
         variables = {
             'mols': mols,
@@ -299,7 +366,7 @@ class quimiotecaDatabaseView(generic.ListView):
             'starting': starting,
             'ending': ending,
             'endpage': endpage,
-        }
+            'elements': elements,
+        } # Set all variables
 
         return render(request, 'chemo/quimiotecaDatabase.html', variables)
-        # return render(request, 'chemo/quimiotecaDatabase.html')
