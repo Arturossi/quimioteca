@@ -85,7 +85,7 @@
                     <i class="fa fa-angle-double-left fa-3x" title="Primeira página" style="font-weight: bold"></i>
                 </a>
                 &nbsp;
-                <a {% if next < 1 %}disabled="True"{% else %}href="quimiotecaDatabase?page={{ previous }}&elements={{ elements }}"{% endif %}>
+                <a {% if previous < 1 %}disabled="True"{% else %}href="quimiotecaDatabase?page={{ previous }}&elements={{ elements }}"{% endif %}>
                     <i class="fa fa-angle-left fa-3x" title="Página anterior" style="font-weight: bold"></i>
                 </a>
             </span>
@@ -178,7 +178,7 @@
                     <i class="fa fa-angle-double-left fa-3x" title="Primeira página" style="font-weight: bold"></i>
                 </a>
                 &nbsp;
-                <a {% if next < 1 %}disabled="True"{% else %}href="quimiotecaDatabase?page={{ previous }}&elements={{ elements }}"{% endif %}>
+                <a {% if previous < 1 %}disabled="True"{% else %}href="quimiotecaDatabase?page={{ previous }}&elements={{ elements }}"{% endif %}>
                     <i class="fa fa-angle-left fa-3x" title="Página anterior" style="font-weight: bold"></i>
                 </a>
             </span>
