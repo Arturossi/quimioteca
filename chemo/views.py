@@ -344,8 +344,11 @@ class quimiotecaDatabaseView(generic.ListView):
 
         paginator = Paginator(mols, elements) # Make the pages
         mols = paginator.page(page) # Set the page
+        endpage = math.ceil(count/elements) # Calculate how many pages we have
+
 
         nextpage = page + 1 # Value to be put in next '>' button
+
         previouspage = page - 1 # Value to be put in previous '<' button
 
         starting = (page-1)*elements + 1 # Starting element in table
@@ -355,7 +358,6 @@ class quimiotecaDatabaseView(generic.ListView):
         if ending > count: # Check if the last element is higher than the size of database
             ending = count # Correct the issue
 
-        endpage = math.ceil(count/elements) # Calculate how many pages we have
 
         variables = {
             'mols': mols,

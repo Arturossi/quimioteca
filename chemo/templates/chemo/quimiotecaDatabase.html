@@ -85,7 +85,7 @@
                     <i class="fa fa-angle-double-left fa-3x" title="Primeira página" style="font-weight: bold"></i>
                 </a>
                 &nbsp;
-                <a href="quimiotecaDatabase?page={{ previous }}&elements={{ elements }}">
+                <a {% if next < 1 %}disabled="True"{% else %}href="quimiotecaDatabase?page={{ previous }}&elements={{ elements }}"{% endif %}>
                     <i class="fa fa-angle-left fa-3x" title="Página anterior" style="font-weight: bold"></i>
                 </a>
             </span>
@@ -96,7 +96,7 @@
                 &nbsp;
             </span>
             <span style="font-size: 0.5rem;">
-                <a href="quimiotecaDatabase?page={{ next }}&elements={{ elements }}">
+                <a {% if next < endpage %}href="quimiotecaDatabase?page={{ next }}&elements={{ elements }}"{% else %}disabled="True"{% endif %}>
                     <i class="fa fa-angle-right fa-3x" title="Próxima página" style="font-weight: bold"></i>
                 </a>
                 &nbsp;
@@ -178,7 +178,7 @@
                     <i class="fa fa-angle-double-left fa-3x" title="Primeira página" style="font-weight: bold"></i>
                 </a>
                 &nbsp;
-                <a href="quimiotecaDatabase?page={{ previous }}&elements={{ elements }}">
+                <a {% if next < 1 %}disabled="True"{% else %}href="quimiotecaDatabase?page={{ previous }}&elements={{ elements }}"{% endif %}>
                     <i class="fa fa-angle-left fa-3x" title="Página anterior" style="font-weight: bold"></i>
                 </a>
             </span>
@@ -189,7 +189,7 @@
                 &nbsp;
             </span>
             <span style="font-size: 0.5rem;">
-                <a href="quimiotecaDatabase?page={{ next }}&elements={{ elements }}">
+                <a {% if next < endpage %}href="quimiotecaDatabase?page={{ next }}&elements={{ elements }}"{% else %}disabled="True"{% endif %}>
                     <i class="fa fa-angle-right fa-3x" title="Próxima página" style="font-weight: bold"></i>
                 </a>
                 &nbsp;
