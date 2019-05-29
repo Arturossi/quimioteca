@@ -18,6 +18,7 @@ from chemo.models import *
 # General imports
 import os
 import json
+import math
 import logging
 
 import pandas as pd
@@ -76,39 +77,45 @@ logger = logging.getLogger(__name__)
             print(-1)'''
 
 #a - Desenho (PNG)
-#b - <Molecule Name>
-#c - <Total Molweight>
-#d - <cLogP>
-#e - <cLogS>
-#f - <Polar Surface Area>
+# b - <Molecule Name>
+# c - <Total Molweight>
+# d - <cLogP>
+# e - <cLogS>
+# f - <Polar Surface Area>
+
 
 def generateImages(path):
-    sdf = Chem.SDMolSupplier(path)#'GREENIDGE_APAGAR.sdf')
+    sdf = Chem.SDMolSupplier(path)  # 'GREENIDGE_APAGAR.sdf')
     ms = [x for x in sdf if x is not None]
 
     for m in ms:
-        tmp=AllChem.Compute2DCoords(m)
+        tmp = AllChem.Compute2DCoords(m)
 
-    for i in range(len(ms)) :
-        name=ms[i].GetProp('_Name')
-        Draw.MolToFile(ms[i], os.path.join(settings.FILES_DIR, f'molImages/{name}.png'))
-    
+    for i in range(len(ms)):
+        name = ms[i].GetProp('_Name')
+        Draw.MolToFile(ms[i], os.path.join(
+            settings.FILES_DIR, f'molImages/{name}.png'))
+
     return
+
 
 def csv2json(request, path='GREENIDGE_APAGAR', separator='\t'):
     generateImages(os.path.join(settings.FILES_DIR, str(path) + ".sdf"))
-    
-    df = pd.read_csv(os.path.join(settings.FILES_DIR, str(path) + ".txt"), sep=separator)
+
+    df = pd.read_csv(os.path.join(settings.FILES_DIR,
+                                  str(path) + ".txt"), sep=separator)
     df2 = df.drop(['Structure [idcode]', 'Unnamed: 18'], axis=1)
     df2.to_json(os.path.join(settings.FILES_DIR, str(path) + ".json"))
 
     return render(request, 'chemo/quimiotecaDatabase.html')
+
 
 def readjson(path='GREENIDGE_APAGAR'):
     fullPath = os.path.join(settings.FILES_DIR, str(path) + ".json")
     data = json.load(fullPath)
 
     return data
+
 
 def feedDatabase(request, path='GREENIDGE_APAGAR', separator='\t'):
     '''
@@ -118,37 +125,39 @@ def feedDatabase(request, path='GREENIDGE_APAGAR', separator='\t'):
             - path [string]: Path to file to be read with pandas (format of file should be csv like).
             - separator [string]: Key to perform the split in pandas library.
     '''
-    
+
     generateImages(os.path.join(settings.FILES_DIR, str(path) + ".sdf"))
 
-    df = pd.read_csv(os.path.join(settings.FILES_DIR, str(path) + ".txt"), dtype=str, sep=separator)
+    df = pd.read_csv(os.path.join(settings.FILES_DIR, str(
+        path) + ".txt"), dtype=str, sep=separator)
     df = df.drop(['Structure [idcode]', 'Unnamed: 18'], axis=1)
-    
+
     for index, row in df.iterrows():
         try:
             obj, created = Compounds.objects.get_or_create(
-                moleculeName = row['Molecule Name'].strip(),
-                totalMolweight = float(row['Total Molweight']),
-                cLogP = float(row['cLogP']),
-                cLogS = float(row['cLogS']),
-                hAcceptors = int(row['H-Acceptors']),
-                hDonors = int(row['H-Donors']),
-                totalSurfaceArea = float(row['Total Surface Area']),
-                polarSurfaceArea = float(row['Polar Surface Area']),
-                mutagenic = row['Mutagenic'].strip(),
-                tumorigenic = row['Tumorigenic'].strip(),
-                irritant = row['Irritant'].strip(),
-                nonHAtoms = int(row['Non-H Atoms']),
-                stereoCenters = int(row['Stereo Centers']),
-                rotatableBonds = int(row['Rotatable Bonds']),
-                smiles = row['Smiles'].strip(),
-                inChI = row['InChI'].strip(),
-                inChIKey = row['InChI-Key'].strip(),
+                moleculeName=row['Molecule Name'].strip(),
+                totalMolweight=float(row['Total Molweight']),
+                cLogP=float(row['cLogP']),
+                cLogS=float(row['cLogS']),
+                hAcceptors=int(row['H-Acceptors']),
+                hDonors=int(row['H-Donors']),
+                totalSurfaceArea=float(row['Total Surface Area']),
+                polarSurfaceArea=float(row['Polar Surface Area']),
+                mutagenic=row['Mutagenic'].strip(),
+                tumorigenic=row['Tumorigenic'].strip(),
+                irritant=row['Irritant'].strip(),
+                nonHAtoms=int(row['Non-H Atoms']),
+                stereoCenters=int(row['Stereo Centers']),
+                rotatableBonds=int(row['Rotatable Bonds']),
+                smiles=row['Smiles'].strip(),
+                inChI=row['InChI'].strip(),
+                inChIKey=row['InChI-Key'].strip(),
             )
         except:
-            logger.warn("The molecule " + row['Molecule Name'].strip() + " is experiencig some problems, skipping it.")
+            logger.warn("The molecule " + row['Molecule Name'].strip() +
+                        " is experiencig some problems, skipping it.")
 
-#region otherdatabase
+# region otherdatabase
     '''database = ['Molecule Name', 'Total Molweight', 'cLogP', 'cLogS', 'H-Acceptors', 'H-Donors', 'Total Surface Area',
               'Polar Surface Area', 'Mutagenic', 'Tumorigenic', 'Irritant', 'Non-H Atoms', 'Stereo Centers',
               'Rotatable Bonds', 'Smiles', 'InChI', 'InChI-Key']
@@ -190,12 +199,15 @@ def feedDatabase(request, path='GREENIDGE_APAGAR', separator='\t'):
             surface = 'xxx',#row[''].strip(),
             pka = 'xxx',#row[''],
         )'''
-#endregion
-    return redirect('/quimiotecaDatabase')#render(request, 'chemo/quimiotecaDatabase.html')
+# endregion
+    # render(request, 'chemo/quimiotecaDatabase.html')
+    return redirect('/quimiotecaDatabase')
+
 
 def updateCountries():
     # Load countries.csv
-    countries = pd.read_csv(os.path.join(settings.FILES_DIR, 'database/countries/countries.csv'))
+    countries = pd.read_csv(os.path.join(
+        settings.FILES_DIR, 'database/countries/countries.csv'))
 
     # For each record in csv
     for index, row in countries.iterrows():
@@ -204,6 +216,7 @@ def updateCountries():
             name=row['Country'].strip(),
             continentName=row['Continent'].strip(),
         )
+
 
 class IndexView(generic.ListView):
     """
@@ -220,28 +233,33 @@ class IndexView(generic.ListView):
         # Render page index.html within the request and variables
         return render(request, 'chemo/index.html', {'countries': updateCountries()})
 
+
 class compoundView(generic.ListView):
     def get(self, request, **kwargs):
         return render(request, 'chemo/compound.html')
+
 
 class aboutView(generic.ListView):
     def get(self, request, **kwargs):
         return render(request, 'chemo/about.html')
 
+
 class contactUsView(generic.ListView):
     def get(self, request, **kwargs):
         return render(request, 'chemo/contactUs.html')
 
+
 class loginView(generic.ListView):
     def get(self, request, **kwargs):
         return render(request, 'chemo/login.html')
+
 
 class quimiotecaDatabaseView(generic.ListView):
     def get(self, request, **kwargs):
 
         mols = Compounds.objects.all()
 
-        counter = mols.count()
+        count = mols.count()
 
         elements = 10
 
@@ -251,12 +269,12 @@ class quimiotecaDatabaseView(generic.ListView):
                     page = int(request.GET.get('page'))
                 except:
                     page = 1
-                
-                if not page or page < 1 or page > (int(counter) / elements + 1):
+
+                if not page or page < 1 or page > (int(count) / elements + 1):
                     page = 1
             else:
                 page = 1
-            
+
         else:
             page = 1
 
@@ -266,12 +284,22 @@ class quimiotecaDatabaseView(generic.ListView):
         nextpage = page + 1
         previouspage = page - 1
 
+        starting = (page-1)*elements + 1
+        ending = page*elements
+
+
+        endpage = math.ceil(count/10)
+
         variables = {
             'mols': mols,
             'page': page,
             'next': nextpage,
             'previous': previouspage,
+            'count': count,
+            'starting': starting,
+            'ending': ending,
+            'endpage': endpage,
         }
 
         return render(request, 'chemo/quimiotecaDatabase.html', variables)
-        #return render(request, 'chemo/quimiotecaDatabase.html')
+        # return render(request, 'chemo/quimiotecaDatabase.html')

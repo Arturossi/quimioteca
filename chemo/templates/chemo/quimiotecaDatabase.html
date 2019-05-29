@@ -13,8 +13,8 @@
     <meta name="keywords" content="Quimioteca Nacional">
     <!-- CSS dependencies -->
     <link rel="stylesheet" href="{% static 'chemo/aquamarine.css' %}">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        type="text/css">
     <!-- Script: Make my navbar transparent when the document is scrolled to top -->
     <script src="{% static 'chemo/js/navbar-ontop.js' %}"></script>
     <!-- Script: Animated entrance -->
@@ -54,8 +54,6 @@
             </div>
         </div>
     </nav>
-    <!-- Cover -->
-    <!-- Parallax section -->
     <div class="text-center py-5">
         <div class="container">
             <div class="row">
@@ -77,9 +75,22 @@
             </div>
         </div>
     </div>
-    <!-- <div class="pb-3" style=""> -->
     <div style="margin: 5px 80px 5px 80px">
         <h1>Compostos</h1>
+        <span class="float-right">Exibindo resultados: {{ starting }} a {{ ending }} de {{ count }}</span>
+        <br/>
+        <div>
+            <a href="quimiotecaDatabase?page={{ previous }}">
+                <i class="fa fa-chevron-left" style="font-weight: bold"></i>
+            </a>
+            &nbsp;
+            <input id="pagenum" type="textbox" value="{{ page }}" style="width: 40px;"></input> de {{ endpage }}
+            &nbsp;
+            <a href="quimiotecaDatabase?page={{ next }}">
+                <i class="fa fa-chevron-right" style="font-weight: bold"></i>
+            </a>
+        </div>
+        <br/>
         <div class="table-responsive">
             <table border="1" class="table table-striped table-bordered table-info">
                 <tr>
@@ -98,9 +109,6 @@
                     <td>Non-H Atoms</td>
                     <td>Stereo Centers</td>
                     <td>Rotatable Bonds</td>
-                    <!-- <td>Smiles</td>
-                    <td>InChI</td>
-                    <td>InChI-Key</td> -->
                 </tr>
 
                 {% for mol in mols %}
@@ -126,13 +134,17 @@
                 {% endfor %}
             </table>
         </div>
+        <span class="float-right">Exibindo resultados: {{ starting }} a {{ ending }} de {{ count }}</span>
+        <br />
         <div>
             <a href="quimiotecaDatabase?page={{ previous }}">
-                <i class="fa fa-angle-left"></i>
+                <i class="fa fa-chevron-left" style="font-weight: bold"></i>
             </a>
-            <input type="textbox" value="{{ page }}" style="width: 40px;"></input>
+            &nbsp;
+            <input id="pagenum" type="textbox" value="{{ page }}" style="width: 40px;"></input> de {{ endpage }}
+            &nbsp;
             <a href="quimiotecaDatabase?page={{ next }}">
-                <i class="fa fa-angle-right"></i>
+                <i class="fa fa-chevron-right" style="font-weight: bold"></i>
             </a>
         </div>
     </div>
@@ -175,6 +187,8 @@
                     <p class="text-light">© Copyright 2019 Quimioteca Nacional - Todos Direitos Reservados. </p>
                 </div>
             </div>
+            </div>
+            <br/>
         </div>
     </footer>
     <!-- JavaScript dependencies -->
@@ -187,6 +201,16 @@
     </script>
     <!-- Script: Smooth scrolling between anchors in the same page -->
     <script src="{% static 'js/smooth-scroll.js' %}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#pagenum").on('keyup', function (e) {
+                if (e.keyCode == 13) {
+                    window.location.replace("quimiotecaDatabase?page=" + $('#pagenum').val())
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
