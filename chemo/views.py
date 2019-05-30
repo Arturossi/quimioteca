@@ -98,11 +98,20 @@ def generateImages(path):
 
     for i in range(len(ms)): # Iterate over all elements
         name = ms[i].GetProp('_Name') # Get molecule name
-        Draw.MolToFile(ms[i], os.path.join(
-            settings.FILES_DIR, f'molImages/{name}.png')) # Save it
+        Draw.MolToFile(ms[i], 
+            os.path.join(settings.FILES_DIR, f'molImages/{name}.png'),
+            size=(300,300),
+            kekulize=True, 
+            wedgeBonds=True,
+            fitImage=True) # Save it
 
+        Draw.MolToFile(ms[i], 
+            os.path.join(settings.FILES_DIR, f'molThumbs/{name}.png'),
+            size=(150,150),
+            kekulize=True,
+            wedgeBonds=True,
+            fitImage=True) # Save it
     return
-
 
 '''def csv2json(request, path='GREENIDGE_APAGAR', separator='\t'):
     generateImages(os.path.join(settings.FILES_DIR, str(path) + ".sdf"))
