@@ -1,0 +1,164 @@
+Watching for file changes with StatReloader
+Invalid HTTP_HOST header: '52.67.40.12:8000'. You may need to add '52.67.40.12' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/utils/deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/middleware/common.py", line 47, in process_request
+    host = request.get_host()
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/http/request.py", line 111, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '52.67.40.12:8000'. You may need to add '52.67.40.12' to ALLOWED_HOSTS.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/utils/deprecation.py", line 94, in __call__
+    response = response or self.get_response(request)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 36, in inner
+    response = response_for_exception(request, exc)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 80, in response_for_exception
+    response = debug.technical_500_response(request, *sys.exc_info(), status_code=400)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/views/debug.py", line 94, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/views/debug.py", line 332, in get_traceback_html
+    t = DEBUG_ENGINE.from_string(fh.read())
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/encodings/ascii.py", line 26, in decode
+    return codecs.ascii_decode(input, self.errors)[0]
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 9735: ordinal not in range(128)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/utils/deprecation.py", line 94, in __call__
+    response = response or self.get_response(request)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 36, in inner
+    response = response_for_exception(request, exc)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 90, in response_for_exception
+    response = handle_uncaught_exception(request, get_resolver(get_urlconf()), sys.exc_info())
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 125, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/views/debug.py", line 94, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/views/debug.py", line 332, in get_traceback_html
+    t = DEBUG_ENGINE.from_string(fh.read())
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/encodings/ascii.py", line 26, in decode
+    return codecs.ascii_decode(input, self.errors)[0]
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 9735: ordinal not in range(128)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/wsgiref/handlers.py", line 137, in run
+    self.result = application(self.environ, self.start_response)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/contrib/staticfiles/handlers.py", line 65, in __call__
+    return self.application(environ, start_response)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/wsgi.py", line 141, in __call__
+    response = self.get_response(request)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/base.py", line 75, in get_response
+    response = self._middleware_chain(request)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 36, in inner
+    response = response_for_exception(request, exc)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 90, in response_for_exception
+    response = handle_uncaught_exception(request, get_resolver(get_urlconf()), sys.exc_info())
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 125, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/views/debug.py", line 94, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/views/debug.py", line 332, in get_traceback_html
+    t = DEBUG_ENGINE.from_string(fh.read())
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/encodings/ascii.py", line 26, in decode
+    return codecs.ascii_decode(input, self.errors)[0]
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 9735: ordinal not in range(128)
+[05/Jul/2019 20:19:59] "GET / HTTP/1.1" 500 59
+Invalid HTTP_HOST header: '52.67.40.12:8000'. You may need to add '52.67.40.12' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/utils/deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/middleware/common.py", line 47, in process_request
+    host = request.get_host()
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/http/request.py", line 111, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '52.67.40.12:8000'. You may need to add '52.67.40.12' to ALLOWED_HOSTS.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/utils/deprecation.py", line 94, in __call__
+    response = response or self.get_response(request)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 36, in inner
+    response = response_for_exception(request, exc)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 80, in response_for_exception
+    response = debug.technical_500_response(request, *sys.exc_info(), status_code=400)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/views/debug.py", line 94, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/views/debug.py", line 332, in get_traceback_html
+    t = DEBUG_ENGINE.from_string(fh.read())
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/encodings/ascii.py", line 26, in decode
+    return codecs.ascii_decode(input, self.errors)[0]
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 9735: ordinal not in range(128)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/utils/deprecation.py", line 94, in __call__
+    response = response or self.get_response(request)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 36, in inner
+    response = response_for_exception(request, exc)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 90, in response_for_exception
+    response = handle_uncaught_exception(request, get_resolver(get_urlconf()), sys.exc_info())
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 125, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/views/debug.py", line 94, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/views/debug.py", line 332, in get_traceback_html
+    t = DEBUG_ENGINE.from_string(fh.read())
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/encodings/ascii.py", line 26, in decode
+    return codecs.ascii_decode(input, self.errors)[0]
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 9735: ordinal not in range(128)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/wsgiref/handlers.py", line 137, in run
+    self.result = application(self.environ, self.start_response)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/contrib/staticfiles/handlers.py", line 65, in __call__
+    return self.application(environ, start_response)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/wsgi.py", line 141, in __call__
+    response = self.get_response(request)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/base.py", line 75, in get_response
+    response = self._middleware_chain(request)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 36, in inner
+    response = response_for_exception(request, exc)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 90, in response_for_exception
+    response = handle_uncaught_exception(request, get_resolver(get_urlconf()), sys.exc_info())
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/core/handlers/exception.py", line 125, in handle_uncaught_exception
+    return debug.technical_500_response(request, *exc_info)
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/views/debug.py", line 94, in technical_500_response
+    html = reporter.get_traceback_html()
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/site-packages/django/views/debug.py", line 332, in get_traceback_html
+    t = DEBUG_ENGINE.from_string(fh.read())
+  File "/home/ec2-user/anaconda3/envs/chemdb/lib/python3.6/encodings/ascii.py", line 26, in decode
+    return codecs.ascii_decode(input, self.errors)[0]
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 9735: ordinal not in range(128)
+[05/Jul/2019 20:19:59] "GET /favicon.ico HTTP/1.1" 500 59
+/home/ec2-user/sites/quimioteca/quimioteca/settings.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+July 05, 2019 - 20:19:26
+Django version 2.2, using settings 'quimioteca.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
