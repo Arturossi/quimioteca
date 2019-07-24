@@ -1,0 +1,600 @@
+DB04930
+Actelion Java MolfileCreator 2.0
+
+  0  0  0  0  0  0              0 V3000
+M  V30 BEGIN CTAB
+M  V30 COUNTS 26 28 0 0 0
+M  V30 BEGIN ATOM
+M  V30 1 Cl 0.0 0.0 0.0 0
+M  V30 2 C 1.2873 0.7559 0.0 0
+M  V30 3 Cl 2.5747 0.0236 0.0 0
+M  V30 4 C 1.2755 2.2677 0.0 0
+M  V30 5 C -0.0354 3.0236 0.0 0
+M  V30 6 C -1.5472 3.0354 0.0 0
+M  V30 7 C -0.7913 4.3346 0.0 0
+M  V30 8 C -1.559 1.5472 0.0 0
+M  V30 9 C -2.8582 3.7913 0.0 0
+M  V30 10 C -0.8031 5.8464 0.0 0
+M  V30 11 O -2.1141 6.6023 0.0 0
+M  V30 12 O 0.4842 6.6023 0.0 0
+M  V30 13 C 0.4724 8.1141 0.0 0
+M  V30 14 C 1.7598 8.87 0.0 0
+M  V30 15 C 1.748 10.3818 0.0 0
+M  V30 16 C 3.0472 8.1377 0.0 0
+M  V30 17 C 3.0354 11.1377 0.0 0
+M  V30 18 C 4.3346 8.8936 0.0 0
+M  V30 19 O 3.0236 12.6495 0.0 0
+M  V30 20 C 4.3228 10.4054 0.0 0
+M  V30 21 C 4.311 13.4054 0.0 0
+M  V30 22 C 5.5983 12.6731 0.0 0
+M  V30 23 C 4.2991 14.9172 0.0 0
+M  V30 24 C 6.8857 13.429 0.0 0
+M  V30 25 C 5.5865 15.6731 0.0 0
+M  V30 26 C 6.8739 14.9408 0.0 0
+M  V30 END ATOM
+M  V30 BEGIN BOND
+M  V30 1 1 1 2
+M  V30 2 1 2 3
+M  V30 3 2 2 4
+M  V30 4 1 4 5
+M  V30 5 1 5 6
+M  V30 6 1 5 7
+M  V30 7 1 6 8
+M  V30 8 1 6 9
+M  V30 9 1 7 10
+M  V30 10 2 10 11
+M  V30 11 1 10 12
+M  V30 12 1 12 13
+M  V30 13 1 13 14
+M  V30 14 2 14 15
+M  V30 15 1 14 16
+M  V30 16 1 15 17
+M  V30 17 2 16 18
+M  V30 18 1 17 19
+M  V30 19 2 17 20
+M  V30 20 1 19 21
+M  V30 21 2 21 22
+M  V30 22 1 21 23
+M  V30 23 1 22 24
+M  V30 24 2 23 25
+M  V30 25 2 24 26
+M  V30 26 1 6 7
+M  V30 27 1 18 20
+M  V30 28 1 25 26
+M  V30 END BOND
+M  V30 END CTAB
+M  END
+>  <Molecule Name>
+
+
+>  <DATABASE_ID>
+DB04930
+
+>  <DATABASE_NAME>
+drugbank
+
+>  <SMILES>
+CC1(C)C(C=C(Cl)Cl)C1C(=O)OCC1=CC(OC2=CC=CC=C2)=CC=C1
+
+>  <INCHI_IDENTIFIER>
+InChI=1S/C21H20Cl2O3/c1-21(2)17(12-18(22)23)19(21)20(24)25-13-14-7-6-10-16(11-14)26-15-8-4-3-5-9-15/h3-12,17,19H,13H2,1-2H3
+
+>  <INCHI_KEY>
+RLLPVAHGXHCWKJ-UHFFFAOYSA-N
+
+>  <Total Molweight>
+391.293
+
+>  <cLogP>
+5.8089
+
+>  <cLogS>
+-6.469
+
+>  <H-Acceptors>
+3
+
+>  <H-Donors>
+0
+
+>  <Total Surface Area>
+286.51
+
+>  <Relative PSA>
+0.11532
+
+>  <Polar Surface Area>
+35.53
+
+>  <Druglikeness>
+0.92471
+
+>  <Mutagenic>
+high
+
+>  <Tumorigenic>
+high
+
+>  <Reproductive Effective>
+high
+
+>  <Irritant>
+high
+
+>  <Nasty Functions>
+1,1-dihalo-alkene
+
+>  <Non-H Atoms>
+26
+
+>  <Electronegative Atoms>
+5
+
+>  <Stereo Centers>
+2
+
+>  <Rotatable Bonds>
+7
+
+$$$$
+DB13323
+Actelion Java MolfileCreator 2.0
+
+  0  0  0  0  0  0              0 V3000
+M  V30 BEGIN CTAB
+M  V30 COUNTS 5 4 0 0 0
+M  V30 BEGIN ATOM
+M  V30 1 Cl 0.0 0.0 0.0 0
+M  V30 2 C 0.7316 1.3099 0.0 0
+M  V30 3 Cl -0.0236 2.6199 0.0 0
+M  V30 4 C 2.2186 1.3217 0.0 0
+M  V30 5 Cl 2.9503 2.6317 0.0 0
+M  V30 END ATOM
+M  V30 BEGIN BOND
+M  V30 1 1 1 2
+M  V30 2 1 2 3
+M  V30 3 2 2 4
+M  V30 4 1 4 5
+M  V30 END BOND
+M  V30 END CTAB
+M  END
+>  <Molecule Name>
+
+
+>  <DATABASE_ID>
+DB13323
+
+>  <DATABASE_NAME>
+drugbank
+
+>  <SMILES>
+ClC=C(Cl)Cl
+
+>  <INCHI_IDENTIFIER>
+InChI=1S/C2HCl3/c3-1-2(4)5/h1H
+
+>  <INCHI_KEY>
+XSTXAVWGXDQKEL-UHFFFAOYSA-N
+
+>  <Total Molweight>
+131.389
+
+>  <cLogP>
+2.391
+
+>  <cLogS>
+-2.538
+
+>  <H-Acceptors>
+0
+
+>  <H-Donors>
+0
+
+>  <Total Surface Area>
+84.47
+
+>  <Relative PSA>
+0
+
+>  <Polar Surface Area>
+0
+
+>  <Druglikeness>
+-1.4963
+
+>  <Mutagenic>
+high
+
+>  <Tumorigenic>
+high
+
+>  <Reproductive Effective>
+high
+
+>  <Irritant>
+high
+
+>  <Nasty Functions>
+1,1-dihalo-alkene; 1,2-dihalo-alkene
+
+>  <Non-H Atoms>
+5
+
+>  <Electronegative Atoms>
+3
+
+>  <Stereo Centers>
+0
+
+>  <Rotatable Bonds>
+0
+
+$$$$
+DB00922
+Actelion Java MolfileCreator 2.0
+
+  0  0  0  0  0  0              0 V3000
+M  V30 BEGIN CTAB
+M  V30 COUNTS 21 22 0 0 0
+M  V30 BEGIN ATOM
+M  V30 1 O 0.0 0.0 0.0 0
+M  V30 2 C -1.3021 0.7625 0.0 0
+M  V30 3 N -2.6043 0.0234 0.0 0
+M  V30 4 C -1.3138 2.2641 0.0 0
+M  V30 5 N -3.9064 0.7859 0.0 0
+M  V30 6 C -2.616 3.0148 0.0 0 CFG=2
+M  V30 7 C -3.9181 2.2875 0.0 0
+M  V30 8 C -2.6277 4.5164 0.0 0
+M  V30 9 C -5.2203 3.0383 0.0 0
+M  V30 10 C -6.5224 2.311 0.0 0
+M  V30 11 C -5.232 4.5399 0.0 0
+M  V30 12 C -7.8246 3.0618 0.0 0
+M  V30 13 C -6.5342 5.2907 0.0 0
+M  V30 14 C -7.8363 4.5633 0.0 0
+M  V30 15 N -9.1385 5.3141 0.0 0
+M  V30 16 N -10.4406 4.5868 0.0 0
+M  V30 17 C -11.7428 5.3376 0.0 0
+M  V30 18 C -11.7545 6.8392 0.0 0
+M  V30 19 C -13.0449 4.6103 0.0 0
+M  V30 20 N -11.7662 8.3408 0.0 0
+M  V30 21 N -14.3471 3.8712 0.0 0
+M  V30 END ATOM
+M  V30 BEGIN BOND
+M  V30 1 2 1 2
+M  V30 2 1 2 3
+M  V30 3 1 2 4
+M  V30 4 1 3 5
+M  V30 5 1 4 6
+M  V30 6 2 5 7
+M  V30 7 1 6 8 CFG=3
+M  V30 8 1 7 9
+M  V30 9 2 9 10
+M  V30 10 1 9 11
+M  V30 11 1 10 12
+M  V30 12 2 11 13
+M  V30 13 2 12 14
+M  V30 14 1 14 15
+M  V30 15 1 15 16
+M  V30 16 2 16 17
+M  V30 17 1 17 18
+M  V30 18 1 17 19
+M  V30 19 3 18 20
+M  V30 20 3 19 21
+M  V30 21 1 6 7
+M  V30 22 1 13 14
+M  V30 END BOND
+M  V30 BEGIN COLLECTION
+M  V30 MDLV30/STEABS ATOMS=(1 6)
+M  V30 END COLLECTION
+M  V30 END CTAB
+M  END
+>  <Molecule Name>
+922
+
+>  <DATABASE_ID>
+DB00922
+
+>  <DATABASE_NAME>
+drugbank
+
+>  <SMILES>
+C[C@@H]1CC(=O)NN=C1C1=CC=C(NN=C(C#N)C#N)C=C1
+
+>  <INCHI_IDENTIFIER>
+InChI=1S/C14H12N6O/c1-9-6-13(21)19-20-14(9)10-2-4-11(5-3-10)17-18-12(7-15)8-16/h2-5,9,17H,6H2,1H3,(H,19,21)/t9-/m1/s1
+
+>  <INCHI_KEY>
+WHXMKTBCFHIYNQ-SECBINFHSA-N
+
+>  <Total Molweight>
+280.290
+
+>  <cLogP>
+2.1411
+
+>  <cLogS>
+-3.952
+
+>  <H-Acceptors>
+7
+
+>  <H-Donors>
+2
+
+>  <Total Surface Area>
+228.31
+
+>  <Relative PSA>
+0.37712
+
+>  <Polar Surface Area>
+113.43
+
+>  <Druglikeness>
+-4.3769
+
+>  <Mutagenic>
+none
+
+>  <Tumorigenic>
+none
+
+>  <Reproductive Effective>
+none
+
+>  <Irritant>
+none
+
+>  <Nasty Functions>
+1,1-dinitrile
+
+>  <Non-H Atoms>
+21
+
+>  <Electronegative Atoms>
+7
+
+>  <Stereo Centers>
+1
+
+>  <Rotatable Bonds>
+3
+
+$$$$
+DB00173
+Actelion Java MolfileCreator 2.0
+
+  0  0  0  0  0  0              0 V3000
+M  V30 BEGIN CTAB
+M  V30 COUNTS 10 11 0 0 0
+M  V30 BEGIN ATOM
+M  V30 1 N 0.0 0.0 0.0 0
+M  V30 2 C 1.298 0.7621 0.0 0
+M  V30 3 C -0.0119 -1.5005 0.0 0
+M  V30 4 N 1.2861 2.2865 0.0 0
+M  V30 5 C 2.5961 0.0238 0.0 0
+M  V30 6 N 1.2861 -2.2388 0.0 0
+M  V30 7 N 4.0132 0.5001 0.0 0
+M  V30 8 C 2.5842 -1.4767 0.0 0
+M  V30 9 C 4.8826 -0.7026 0.0 0
+M  V30 10 N 4.0013 -1.9292 0.0 0
+M  V30 END ATOM
+M  V30 BEGIN BOND
+M  V30 1 2 1 2
+M  V30 2 1 1 3
+M  V30 3 1 2 4
+M  V30 4 1 2 5
+M  V30 5 2 3 6
+M  V30 6 1 5 7
+M  V30 7 2 5 8
+M  V30 8 1 7 9
+M  V30 9 1 8 10
+M  V30 10 1 6 8
+M  V30 11 2 9 10
+M  V30 END BOND
+M  V30 END CTAB
+M  END
+>  <Molecule Name>
+173
+
+>  <DATABASE_ID>
+DB00173
+
+>  <DATABASE_NAME>
+drugbank
+
+>  <SMILES>
+NC1=C2NC=NC2=NC=N1
+
+>  <INCHI_IDENTIFIER>
+InChI=1S/C5H5N5/c6-4-3-5(9-1-7-3)10-2-8-4/h1-2H,(H3,6,7,8,9,10)
+
+>  <INCHI_KEY>
+GFFGJBXGBJISGV-UHFFFAOYSA-N
+
+>  <Total Molweight>
+135.130
+
+>  <cLogP>
+-0.347
+
+>  <cLogS>
+-2.269
+
+>  <H-Acceptors>
+5
+
+>  <H-Donors>
+2
+
+>  <Total Surface Area>
+102.23
+
+>  <Relative PSA>
+0.60814
+
+>  <Polar Surface Area>
+80.48
+
+>  <Druglikeness>
+-0.021492
+
+>  <Mutagenic>
+high
+
+>  <Tumorigenic>
+high
+
+>  <Reproductive Effective>
+high
+
+>  <Irritant>
+high
+
+>  <Nasty Functions>
+1,2-diamino-aryl
+
+>  <Non-H Atoms>
+10
+
+>  <Electronegative Atoms>
+5
+
+>  <Stereo Centers>
+0
+
+>  <Rotatable Bonds>
+0
+
+$$$$
+DB04953
+Actelion Java MolfileCreator 2.0
+
+  0  0  0  0  0  0              0 V3000
+M  V30 BEGIN CTAB
+M  V30 COUNTS 22 23 0 0 0
+M  V30 BEGIN ATOM
+M  V30 1 F 0.0 0.0 0.0 0
+M  V30 2 C -0.0117 1.5053 0.0 0
+M  V30 3 C 1.2701 2.2579 0.0 0
+M  V30 4 C -1.3171 2.2579 0.0 0
+M  V30 5 C 1.2583 3.7632 0.0 0
+M  V30 6 C -1.3289 3.7632 0.0 0
+M  V30 7 C -0.047 4.5159 0.0 0
+M  V30 8 C -0.0588 6.0212 0.0 0
+M  V30 9 N -1.3641 6.7738 0.0 0
+M  V30 10 C -1.3759 8.2791 0.0 0
+M  V30 11 C -2.6813 9.0435 0.0 0
+M  V30 12 C -0.094 9.0435 0.0 0
+M  V30 13 C -2.693 10.5488 0.0 0
+M  V30 14 C -0.1058 10.5488 0.0 0
+M  V30 15 N -3.9984 11.3015 0.0 0
+M  V30 16 C -1.4112 11.3015 0.0 0
+M  V30 17 N -1.4229 12.8068 0.0 0
+M  V30 18 C -0.1411 13.5595 0.0 0
+M  V30 19 O 1.1407 12.8303 0.0 0
+M  V30 20 O -0.1528 15.0648 0.0 0
+M  V30 21 C 1.1289 15.8174 0.0 0
+M  V30 22 C 1.1172 17.3227 0.0 0
+M  V30 END ATOM
+M  V30 BEGIN BOND
+M  V30 1 1 1 2
+M  V30 2 2 2 3
+M  V30 3 1 2 4
+M  V30 4 1 3 5
+M  V30 5 2 4 6
+M  V30 6 2 5 7
+M  V30 7 1 7 8
+M  V30 8 1 8 9
+M  V30 9 1 9 10
+M  V30 10 2 10 11
+M  V30 11 1 10 12
+M  V30 12 1 11 13
+M  V30 13 2 12 14
+M  V30 14 1 13 15
+M  V30 15 2 13 16
+M  V30 16 1 16 17
+M  V30 17 1 17 18
+M  V30 18 2 18 19
+M  V30 19 1 18 20
+M  V30 20 1 20 21
+M  V30 21 1 21 22
+M  V30 22 1 6 7
+M  V30 23 1 14 16
+M  V30 END BOND
+M  V30 END CTAB
+M  END
+>  <Molecule Name>
+
+
+>  <DATABASE_ID>
+DB04953
+
+>  <DATABASE_NAME>
+drugbank
+
+>  <SMILES>
+CCOC(=O)NC1=C(N)C=C(NCC2=CC=C(F)C=C2)C=C1
+
+>  <INCHI_IDENTIFIER>
+InChI=1S/C16H18FN3O2/c1-2-22-16(21)20-15-8-7-13(9-14(15)18)19-10-11-3-5-12(17)6-4-11/h3-9,19H,2,10,18H2,1H3,(H,20,21)
+
+>  <INCHI_KEY>
+PCOBBVZJEWWZFR-UHFFFAOYSA-N
+
+>  <Total Molweight>
+303.336
+
+>  <cLogP>
+2.4614
+
+>  <cLogS>
+-4.346
+
+>  <H-Acceptors>
+5
+
+>  <H-Donors>
+3
+
+>  <Total Surface Area>
+238.34
+
+>  <Relative PSA>
+0.2569
+
+>  <Polar Surface Area>
+76.38
+
+>  <Druglikeness>
+-11.554
+
+>  <Mutagenic>
+low
+
+>  <Tumorigenic>
+high
+
+>  <Reproductive Effective>
+none
+
+>  <Irritant>
+high
+
+>  <Nasty Functions>
+1,2-diamino-aryl
+
+>  <Non-H Atoms>
+22
+
+>  <Electronegative Atoms>
+6
+
+>  <Stereo Centers>
+0
+
+>  <Rotatable Bonds>
+6
+
+$$$$
