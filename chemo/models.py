@@ -104,23 +104,25 @@ class Products(models.Model):
         return ', '.join('{}{}'.format(key, val) for key, val in self.__dict__.items())
 
 class Compounds(models.Model):
-    moleculeName = models.CharField(max_length=10) #2i4x
-    totalMolweight = models.FloatField() #728.794
-    cLogP = models.FloatField() #2.8511
-    cLogS = models.FloatField() #-5.343
-    hAcceptors = models.PositiveIntegerField() #14
-    hDonors = models.PositiveIntegerField() #2
-    totalSurfaceArea = models.FloatField() #534.30
-    polarSurfaceArea = models.FloatField() #186.58
-    mutagenic = models.CharField(max_length=10) #none
-    tumorigenic = models.CharField(max_length=10) #none
-    irritant = models.CharField(max_length=10) #none
-    nonHAtoms = models.PositiveIntegerField() #49
-    stereoCenters = models.PositiveIntegerField() #5
-    rotatableBonds = models.PositiveIntegerField() #19
-    smiles = models.CharField(max_length=5000) #CCOP(COc1ccc(C[C@@H]([C@@H](CN(CC(C)C)S(c(cc2)ccc2OC)(=O)=O)O)NC(O[C@@H]2[C@H](CCO3)[C@H]3OC2)=O)cc1)(OCC)=O
-    inChI = models.CharField(max_length=5000) #InChI=1S/C33H49N2O12PS/c1-6-45-48(38,46-7-2)22-44-26-10-8-24(9-11-26)18-29(34-33(37)47-31-21-43-32-28(31)16-17-42-32)30(36)20-35(19-23(3)4)49(39,40)27-14-12-25(41-5)13-15-27/h8-15,23,28-32,36H,6-7,16-22H2,1-5H3,(H,34,37)/t28-,29-,30+,31-,32-/m0/s1
-    inChIKey = models.CharField(max_length=1000) #FCLYPCIMVVLLRN-LUKCZKMGSA-N
+    moleculeName = models.CharField(max_length=10) # 2i4x
+    totalMolweight = models.FloatField() # 728.794
+    cLogP = models.FloatField() # 2.8511
+    cLogS = models.FloatField() # -5.343
+    hAcceptors = models.PositiveIntegerField() # 14
+    hDonors = models.PositiveIntegerField() # 2
+    totalSurfaceArea = models.FloatField() # 534.30
+    polarSurfaceArea = models.FloatField() # 186.58
+    mutagenic = models.CharField(max_length=10) # none
+    tumorigenic = models.CharField(max_length=10) # none
+    irritant = models.CharField(max_length=10) # none
+    nonHAtoms = models.PositiveIntegerField() # 49
+    stereoCenters = models.PositiveIntegerField() # 5
+    rotatableBonds = models.PositiveIntegerField() # 19
+    smiles = models.CharField(max_length=5000) # CCOP(COc1ccc(C[C@@H]([C@@H](CN(CC(C)C)S(c(cc2)ccc2OC)(=O)=O)O)NC(O[C@@H]2[C@H](CCO3)[C@H]3OC2)=O)cc1)(OCC)=O
+    inChI = models.CharField(max_length=5000) # InChI=1S/C33H49N2O12PS/c1-6-45-48(38,46-7-2)22-44-26-10-8-24(9-11-26)18-29(34-33(37)47-31-21-43-32-28(31)16-17-42-32)30(36)20-35(19-23(3)4)49(39,40)27-14-12-25(41-5)13-15-27/h8-15,23,28-32,36H,6-7,16-22H2,1-5H3,(H,34,37)/t28-,29-,30+,31-,32-/m0/s1
+    inChIKey = models.CharField(max_length=1000) # FCLYPCIMVVLLRN-LUKCZKMGSA-N
+    provider = models.CharField(max_length=100, default='unkown') # nome do lab
+    numAtoms = models.IntegerField() # 50
 
 class Molecules(models.Model):
     moleculeID = models.AutoField(primary_key=True)

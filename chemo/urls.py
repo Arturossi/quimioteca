@@ -14,6 +14,7 @@ urlpatterns = [
     path('login', views.loginView.as_view(), name='login'),
     path('quimiotecaDatabase', views.quimiotecaDatabaseView.as_view(),
          name='quimiotecaDatabase'),
+    path('cadastroMoleculas', views.cadastroMolView.as_view(), name='cadastroMoleculas'),
 ]
 
 noviewsurls = [
