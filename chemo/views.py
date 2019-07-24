@@ -104,6 +104,7 @@ def feedDatabase(data):
                 inChIKey=data['inchiKey'].strip(),
                 provider = data['provider'].strip(),
                 numAtoms = int(data['numAtoms']),
+                molname = data['Molecule Name'].strip(),
             ) # Try to fetch elements, if fails insert elements into database (make database unique)
     except:
         logger.warn("The molecule " + data['name'].strip() +
