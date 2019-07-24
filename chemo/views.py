@@ -30,18 +30,17 @@ logger = logging.getLogger(__name__)
 
 # Function to load and parse .sdf files into database [UNFINISHED]
 def loadSDF(sdfPath):
-
     # Create images
-    generateImages(sdfPath)
+    #generateImages(sdfPath)
     
     # Create a molecule supplier
     suppl = Chem.SDMolSupplier(sdfPath)
     
     # Filter empty entries
-    sdf = [x for x in suppl if x is not None]
+    #sdf = [x for x in suppl if x is not None]
     
     # For each molecule in supplier
-    for mol in sdf:
+    for mol in suppl:
         data = {}
         
         try:
@@ -67,20 +66,24 @@ def loadSDF(sdfPath):
             data['InChI'] = inchi.MolToInchi(mol)
             data['inchiKey'] = inchi.MolToInchiKey(mol)
             data['numAtoms'] = mol.GetNumAtoms()
-            data['Molecule Name'] = mol.GetProp('_Molecule Name')
+            
+            print (data['Molecule Name'])
+
             if Entry.objects.filter(inChIKey=linchiKey).exists():
                 if not Entry.objects.filter(provider=lprovider).exists():
-                    feedDatabase(data)
+                    #feedDatabase(data)
+                    a = 1
                 else:
                     continue
                     
             else:
-                feedDatabase(data)
+                a = 1
+                #feedDatabase(data)
                 
         except:
             print("Molecule not processed")
             continue
-            
+    
 
 def feedDatabase(data):
     try: # Try to parse (this avoid those badly filled entries e.g.: half empties)
@@ -104,7 +107,7 @@ def feedDatabase(data):
                 inChIKey=data['inchiKey'].strip(),
                 provider = data['provider'].strip(),
                 numAtoms = int(data['numAtoms']),
-                molname = data['Molecule Name'].strip(),
+                molName = data['Molecule Name'].strip(),
             ) # Try to fetch elements, if fails insert elements into database (make database unique)
     except:
         logger.warn("The molecule " + data['name'].strip() +
@@ -127,7 +130,6 @@ def updateCountries():
             name=row['Country'].strip(),
             continentName=row['Continent'].strip(),
         )
-
 
 class IndexView(generic.ListView):
     """
@@ -195,7 +197,8 @@ class loginView(generic.ListView):
         """
 
         return render(request, 'chemo/login.html')
-    
+
+
 class cadastroMolView(generic.ListView):
     """
     Class to work with login.html template

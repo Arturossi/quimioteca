@@ -19,6 +19,7 @@ urlpatterns = [
 
 noviewsurls = [
     path('updateDatabase', views.feedDatabase, name='updateDatabase'),
+    #path('', 
 ]
 
 urlpatterns = urlpatterns + noviewsurls

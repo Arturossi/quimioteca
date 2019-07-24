@@ -24,6 +24,57 @@
     <script src="{% static 'chemo/js/navbar-ontop.js' %}"></script>
     <!-- Script: Animated entrance -->
     <script src="{% static 'chemo/js/animate-in.js' %}"></script>
+    
+     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
+    <style>
+                .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+    </style>
+    <script>
+        $(function() {
+            // We can attach the `fileselect` event to all file inputs on the page
+            $(document).on('change', ':file', function() {
+                var input = $(this),
+                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [numFiles, label]);
+            });
+
+            // We can watch for our custom `fileselect` event like this
+            $(document).ready( function() {
+                $(':file').on('fileselect', function(event, numFiles, label) {
+
+                    var input = $(this).parents('.input-group').find(':text'),
+                        log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                    if( input.length ) {
+                        input.val(log);
+                    } else {
+                        if( log ) alert(log);
+                    }
+
+                });
+            });
+        });
+    </script>
 </head>
 
 <body class="text-center">
@@ -80,13 +131,26 @@
           <h1 class="mb-3">Cadastro de Moléculas</h1>
         </div>
         <div class="col-md-12">
-          <form>
             <div class="form-group">
-              <label for="exampleFormControlFile1" class="text-center">Escolha um arquivo .SDF para realizar o cadastro de moléculas.</label>
+                <label for="exampleFormControlFile1" class="text-center">Escolha um arquivo .SDF para realizar o cadastro de moléculas.</label>
             </div>
-            <input class="btn btn-dark" type="button" value="Escolha o arquivo">
-            <input class="btn btn-success" type="submit" value="Upload">
-          </form>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label class="input-group-btn">
+                        <span class="btn btn-dark">
+                            Escolha o arquivo&hellip; <input type="file" style="display: none;" accept=".sdf">
+                        </span>
+                    </label>
+                    <input type="text" class="form-control" readonly>
+                </div>
+                
+                <!--<label class="btn btn-default btn-file">
+                    Escolha o arquivo <input type="file" style="display: none;">
+                </label>
+                <!--<input class="btn btn-dark" type="button" value="Escolha o arquivo">-->
+                <input class="btn btn-success" type="submit" value="Upload">
+            </form>
         </div>
       </div>
     </div>
@@ -106,7 +170,6 @@
     </div>
   </footer>
   <!-- JavaScript dependencies -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <!-- Script: Smooth scrolling between anchors in the same page -->

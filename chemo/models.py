@@ -123,6 +123,7 @@ class Compounds(models.Model):
     inChIKey = models.CharField(max_length=1000) # FCLYPCIMVVLLRN-LUKCZKMGSA-N
     provider = models.CharField(max_length=100, default='unkown') # nome do lab
     numAtoms = models.IntegerField() # 50
+    molName = models.CharField(max_length=120) 
 
 class Molecules(models.Model):
     moleculeID = models.AutoField(primary_key=True)
