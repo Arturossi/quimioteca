@@ -67,7 +67,7 @@ def loadSDF(sdfPath):
             data['InChI'] = inchi.MolToInchi(mol)
             data['inchiKey'] = inchi.MolToInchiKey(mol)
             data['numAtoms'] = mol.GetNumAtoms()
-            
+            data['Molecule Name'] = mol.GetProp('_Molecule Name')
             if Entry.objects.filter(inChIKey=linchiKey).exists():
                 if not Entry.objects.filter(provider=lprovider).exists():
                     feedDatabase(data)
