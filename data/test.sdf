@@ -71,7 +71,7 @@ M  END
 DB04930
 
 >  <DATABASE_NAME>
-drugbank
+drugbank123456
 
 >  <SMILES>
 CC1(C)C(C=C(Cl)Cl)C1C(=O)OCC1=CC(OC2=CC=CC=C2)=CC=C1
