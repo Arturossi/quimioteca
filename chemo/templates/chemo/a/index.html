@@ -1,0 +1,225 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <title>Quimioteca</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Artur Rossi & Thallys Nogueira">
+
+    <!-- PAGE settings -->
+    <link rel="icon" href="{% static 'chemo/img/favicon.ico' %}">
+    <title>Quimioteca Nacional do Brasil</title>
+    <meta name="description" content="Site da plataforma Quimioteca Nacional">
+    <meta name="keywords" content="Quimioteca Nacional">
+    <!-- CSS dependencies -->
+    <link rel="stylesheet" href="{% static 'chemo/aquamarine.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          type="text/css">
+    <!-- Script: Make my navbar transparent when the document is scrolled to top -->
+    <script src="{% static 'chemo/js/navbar-ontop.js' %}"></script>
+    <!-- Script: Animated entrance -->
+    <script src="{% static 'chemo/js/animate-in.js' %}"></script>
+</head>
+
+<body class="text-center">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+</nav>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation" style=""> <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse justify-content-start" id="navbar2SupportedContent">
+        </div>
+    </div>
+</nav>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation" style=""> <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbar2SupportedContent">
+            <ul class="navbar-nav">
+                <a class="navbar-brand" href="index" contenteditable="false"><img src="{% static 'chemo/img/logo.png' %}"
+                                                                                  width="60" class="rounded" style="margin-right: 10px;">Quimioteca Nacional</a>
+                <li class="nav-item pt-2">
+                    <a class="nav-link" href="index">Início</a>
+                </li>
+                <li class="nav-item pt-2">
+                    <a class="nav-link" href="cadastroMoleculas">Cadastrar Moléculas</a>
+                </li>
+                
+                <li class="nav-item mx-auto pt-2">
+                    <a class="nav-link" href="quimiotecaDatabase">Quimioteca</a>
+                </li>
+                <li class="nav-item mx-auto pt-2">
+                    <a class="nav-link" href="about">Sobre</a>
+                </li>
+                <li class="nav-item mx-auto pt-2">
+                    <a class="nav-link" href="contactUs">Contato</a>
+                </li>
+                <li class="nav-item mx-auto pt-2">
+                    <a class="nav-link" href="login">Acesso</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<div class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12"></div>
+        </div>
+    </div>
+</div>
+<div class="section-parallax text-center"
+     style="	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+    <div class="container my-5 bg-light p-4">
+        <div class="row">
+            <div class="col-md-12"><img class="img-fluid d-block mx-auto" src="{% static 'chemo/img/quimioteca.png' %}">
+            </div>
+        </div>
+        <div class="row mx-auto">
+            <div class="col-md-12">
+                <h1 class="mb-3">Bem vindo à Quimioteca Nacional do Brasil</h1>
+                <p class=""> A Quimioteca Nacional é uma ferramenta que foi projetada para servir à comunidade científica com
+                    a missão de valorizar os produtos de síntese e extração, obtidos por grupos de pesquisa brasileiros. A força
+                    dessa iniciativa será a habilidade de conectar biólogos e químicos para o desenvolvimento de novos “hits”
+                    seu uso será um reaproveitamento direto dos recursos despendidos pelas agências de fomento no
+                    desenvolvimento dos compostos.</p>
+		   </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="py-5 section bg-faded bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="mb-4">Financiamento</h1>
+                <p class=""> A Quimioteca Nacional é financiada principalmente pelo Edital CAPES Biologia Computacional 
+                implementado na parceria do INMETRO, UFRJ e UFMG, expandida para a UFJF e UNISTRA</p>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-4">
+                <img class="center-block img-fluid d-block" src="{% static 'chemo/img/capes.png' %}"> </div>
+            <div class="col-md-2 col-4">
+                <img class="center-block img-fluid d-block" src="{% static 'chemo/img/inmetro.png' %}"> </div>
+            <div class="col-md-2 col-4">
+                <img class="center-block img-fluid d-block" src="{% static 'chemo/img/ufrj.png' %}"> </div>
+            <div class="col-md-2 col-4">
+                <img class="center-block img-fluid d-block" src="{% static 'chemo/img/ufmg.png' %}"> </div>
+            <div class="col-md-2 col-4">
+                <img class="center-block img-fluid d-block" src="{% static 'chemo/img/ufjf.png' %}"> </div>
+            <div class="col-md-2 col-4">
+                <img class="center-block img-fluid d-block" src="{% static 'chemo/img/unistra.png' %}"> </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Speakers -->
+<div class="py-5 bg-light" id="speakers">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Desenvolvedores</h1>
+            </div>
+        </div>
+        <div class="row">
+<!--            <div class="col-6 col-lg-4 animate-in-right"> !-->
+            <div class="col-sm animate-in-right">
+
+                <a href="#">
+                    <img src="{% static 'chemo/img/thallys2.jpeg' %}" class="center-block img-fluid my-3 rounded-circle"
+                         width="150">
+                    <h3 class="mb-0 text-secondary"><b>Thallys Nogueira</b></h3>
+                    <p class="text-muted">Front-end developer</p>
+                </a>
+            </div>
+<!--            <div class="col-6 col-lg-4 animate-in-right"> !-->
+            <div class="col-sm animate-in-right">
+
+                <a href="#">
+                    <img src="{% static 'chemo/img/artur.png' %}" class="center-block img-fluid my-3 rounded-circle"
+                         width="150">
+                    <h3 class="mb-0 text-secondary"><b>Artur Rossi</b></h3>
+                    <p class="text-muted">Back-end developer</p>
+                </a>
+            </div>
+           
+            <div class="col-sm animate-in-right">
+                <a href="#">
+                    <img src="{% static 'chemo/img/Priscila.jpg' %}" class="center-block img-fluid my-3 rounded-circle"
+                         width="150">
+                    <h3 class="mb-0 text-secondary"><b>Priscila Figueiredo</b></h3>
+                    <p class="text-muted">Researcher</p>
+                </a>
+            </div>
+
+            <div class="col-sm animate-in-right">
+                <a href="#">
+                    <img src="{% static 'chemo/img/Diego.jpg' %}" class="center-block img-fluid my-3 rounded-circle"
+                         width="150">
+                    <h3 class="mb-0 text-secondary"><b>Diego Gomes</b></h3>
+                    <p class="text-muted">Principal Investigator</p>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+<footer class="text-md-left text-center p-4 bg-dark text-light">
+    <div class="container">
+        <div class="row">
+            <div class="my-3 col-lg-4 col-md-6">
+                <h3>Quimioteca Nacional</h3>
+                <p class="my-3">Universidade Federal de Juiz de Fora&nbsp;<br>Juiz de Fora - MG<br></p>
+            </div>
+            
+            <div class="col-lg-1"> </div>
+            <div class="my-3 col-lg-3">
+                <h3>Siga-nos</h3>
+                <a href="https://www.facebook.com" target="blank"><i
+                        class="fa fa-facebook-square fa-3x m-2 text-light"></i></a>
+                <a href="https://www.instagram.com" target="blank"><i class="fa fa-3x fa-instagram m-2 text-light"></i></a>
+                <a href="https://twitter.com" target="blank"><i class="fa fa-3x fa-twitter m-2 text-light"></i></a>
+                <a href="https://plus.google.com" target="blank"><i
+                        class="fa fa-3x fa-google-plus-official m-2 text-light"></i></a>
+                <a href="https://pinterest.com" target="blank"><i class="fa fa-3x fa-pinterest-p m-2 text-light"></i></a>
+                <a href="https://www.youtube.com" target="blank"><i class="fa fa-3x fa-youtube-play m-2 text-light"></i></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p>© Copyright 2019 Quimioteca Nacional - Todos Direitos Reservados. </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- JavaScript dependencies -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+</script>
+<!-- Script: Smooth scrolling between anchors in the same page -->
+<script src="{% static 'chemo/js/smooth-scroll.js' %}" style=""></script>
+</body>
+
+</html>

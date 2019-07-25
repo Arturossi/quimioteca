@@ -44,74 +44,170 @@ def loadSDF(sdfPath):
         data = {}
         
         try:
-            data['fCharge'] = Chem.GetFormalCharge(mol)
+            data['fCharge'] = mol.GetProp('Charge')
         except:
-            data['fCharge'] = None
+            data['fCharge'] = Chem.GetFormalCharge(mol)
             
         try:
-            data['name'] = mol.GetProp('_Name') # Get molecule name
+            data['name'] = mol.GetProp('DATABASE_ID')
         except:
             data['name'] = 'unkown'
             
         try:
-            # pka
-            data['molMass'] = Descriptors.ExactMolWt(mol) # Mol weight ???
-            # monoisotripic mass
-            data['cLogP'] = Crippen.MolLogP(mol) # clogp ???
-            data['tpsa'] = rdMolDescriptors.CalcTPSA(mol)
-            data['hbond'] = rdMolDescriptors.CalcNumHBA(mol)
-            data['hbondDonnors'] = rdMolDescriptors.CalcNumHBD(mol)
-            data['rotable'] = rdMolDescriptors.CalcNumRotatableBonds(mol)
-            data['smiles'] = Chem.MolToSmiles(mol)
-            data['InChI'] = inchi.MolToInchi(mol)
-            data['inchiKey'] = inchi.MolToInchiKey(mol)
-            data['numAtoms'] = mol.GetNumAtoms()
-            
-            print (data['Molecule Name'])
-
-            if Entry.objects.filter(inChIKey=linchiKey).exists():
-                if not Entry.objects.filter(provider=lprovider).exists():
-                    #feedDatabase(data)
-                    a = 1
-                else:
-                    continue
-                    
-            else:
-                a = 1
-                #feedDatabase(data)
-                
+            data['molMass'] = mol.GetProp('Total Molweight')
         except:
-            print("Molecule not processed")
+            data['molMass'] = Descriptors.ExactMolWt(mol) 
+            
+        try:
+            data['cLogP'] = mol.GetProp('cLogP')
+        except:
+            data['cLogP'] = Crippen.MolLogP(mol) # não sei se ta certo
+            
+        try:
+            data['cLogS'] = mol.GetProp('cLogS')
+        except:
+            data['cLogS'] = 0.0
+            
+        try:
+            data['tpsa'] = mol.GetProp('Polar Surface Area')
+        except:
+            data['tpsa'] = rdMolDescriptors.CalcTPSA(mol)
+            
+        try:
+            data['totalSurfaceArea'] = mol.GetProp('Total Surface Area')
+        except:
+            data['totalSurfaceArea'] = rdMolDescriptors.CalcTPSA(mol)
+        
+        try:
+            data['hbondAcceptors'] = mol.GetProp('H-Acceptors')
+        except:
+            data['hbondAcceptors'] = rdMolDescriptors.CalcNumHBA(mol)
+            
+        try:
+            data['hbondDonnors'] = mol.GetProp('H-Donors')
+        except:
+            data['hbondDonnors'] = rdMolDescriptors.CalcNumHBD(mol)
+            
+        try:
+            data['rotable'] = mol.GetProp('Rotatable Bonds')
+        except:
+            data['rotable'] = rdMolDescriptors.CalcNumRotatableBonds(mol)
+            
+        try:
+            data['mutagenic'] = mol.GetProp('Mutagenic')
+        except:
+            data['mutagenic'] = 'Unknown'
+            
+        try:
+            data['tumorigenic'] = mol.GetProp('Tumorigenic')
+        except:
+            data['tumorigenic'] = 'Unknown'
+            
+        try:
+            data['irritant'] = mol.GetProp('Irritant')
+        except:
+            data['irritant'] = 'Unkown'
+            
+        try:
+            data['smiles'] = mol.GetProp('SMILES')
+        except:
+            data['smiles'] = Chem.MolToSmiles(mol)
+            
+        try:
+            data['InChI'] = mol.GetProp('INCHI_IDENTIFIER')
+        except:
+            data['InChI'] = inchi.MolToInchi(mol)
+            
+        try:
+            data['inchiKey'] = mol.GetProp('INCHI_KEY')
+        except:
+            data['inchiKey'] = inchi.MolToInchiKey(mol)
+            
+        try:
+            data['nonHAtoms'] = mol.GetProp('Non-H Atoms')
+        except:
+            data['nonHAtoms'] = -1 # Não sei calcular
+            
+            
+        try:
+            data['numAtoms'] = mol.GetProp('numAtoms')
+        except:
+            data['numAtoms'] = mol.GetNumAtoms()
+        
+        try:
+            data['stereoCenters'] = mol.GetProp('Stereo Centers')
+        except:
+            data['stereoCenters'] = mol.GetNumAtoms()
+            
+        try:
+            data['provider'] = mol.GetProp('DATABASE_NAME')
+        except:
+            print("Nenhum fornecedor encontrado, o campo é obrigatório!")
             continue
-    
+        
+        tmp = AllChem.Compute2DCoords(mol) # Compute its coordinates
+        
+        Draw.MolToFile(mol, 
+            os.path.join(settings.FILES_DIR, f'molImages/' + data["inchiKey"] + '.png'),
+            size=(300,300),
+            kekulize=True, 
+            wedgeBonds=True,
+            fitImage=True) # Save it
+        
+        Draw.MolToFile(mol, 
+            os.path.join(settings.FILES_DIR, f'molThumbs/' + data["inchiKey"] + '.png'),
+            size=(150,150),
+            kekulize=True,
+            wedgeBonds=True,
+            fitImage=True)
+        
+        feedDatabase(data)
+
+        '''
+        if Entry.objects.filter(inChIKey=data['inchiKey']).exists():
+            if not Entry.objects.filter(provider=lprovider).exists():
+                #feedDatabase(data)
+                # append no sdf da base de dados
+                a = 1
+            else:
+                continue
+                
+        else:
+            a = 1
+            #feedDatabase(data)
+            '''
+        '''except:
+            print("Molecule not processed")
+            continue'''
 
 def feedDatabase(data):
-    try: # Try to parse (this avoid those badly filled entries e.g.: half empties)
-        obj, created = Compounds.objects.get_or_create(
-                moleculeName=data['name'].strip(),
-                totalMolweight=0.0,#float(data['Total Molweight']),
-                cLogP=float(data['cLogP']),
-                cLogS=0.0,#float(data['cLogS']),
-                hAcceptors=0,#int(data['H-Acceptors']),
-                hDonors=int(data['hbondDonnors']),
-                totalSurfaceArea=0.0,#float(data['Total Surface Area']),
-                polarSurfaceArea=0.0,#float(data['Polar Surface Area']),
-                mutagenic='none',#data['Mutagenic'].strip(),
-                tumorigenic='none',#data['Tumorigenic'].strip(),
-                irritant='none',#data['Irritant'].strip(),
-                nonHAtoms=0,#int(data['Non-H Atoms']),
-                stereoCenters=0,#int(data['Stereo Centers']),
-                rotatableBonds=int(data['rotable']),
-                smiles=data['smiles'].strip(),
-                inChI=data['InChI'].strip(),
-                inChIKey=data['inchiKey'].strip(),
-                provider = data['provider'].strip(),
-                numAtoms = int(data['numAtoms']),
-                molName = data['Molecule Name'].strip(),
-            ) # Try to fetch elements, if fails insert elements into database (make database unique)
-    except:
+    # append no sdf da base de dados
+    #try: # Try to parse (this avoid those badly filled entries e.g.: half empties)
+    obj, created = Compounds.objects.get_or_create(
+            moleculeName=data['name'].strip(),
+            totalMolweight=float(data['molMass']),
+            cLogP=float(data['cLogP']),
+            cLogS=float(data['cLogS']),
+            hAcceptors=int(data['hbondAcceptors']),
+            hDonors=int(data['hbondDonnors']),
+            totalSurfaceArea=float(data['totalSurfaceArea']),
+            polarSurfaceArea=float(data['tpsa']),
+            mutagenic=data['mutagenic'].strip(),
+            tumorigenic=data['tumorigenic'].strip(),
+            irritant=data['irritant'].strip(),
+            nonHAtoms=int(data['nonHAtoms']),
+            stereoCenters=int(data['stereoCenters']),
+            rotatableBonds=int(data['rotable']),
+            smiles=data['smiles'].strip(),
+            inChI=data['InChI'].strip(),
+            inChIKey=data['inchiKey'].strip(),
+            provider = data['provider'].strip(),
+            numAtoms = int(data['numAtoms']),
+        ) # Try to fetch elements, if fails insert elements into database (make database unique)
+    print("ok")
+    '''except:
         logger.warn("The molecule " + data['name'].strip() +
-                    " is experiencig some problems, skipping it.") # Show a warning
+                    " is experiencig some problems, skipping it.") # Show a warning'''
 
 
 def updateCountries():
@@ -130,6 +226,19 @@ def updateCountries():
             name=row['Country'].strip(),
             continentName=row['Continent'].strip(),
         )
+        
+        
+def uploadMolecule(request):
+    if request.method == 'POST':
+            uploaded_file = request.FILES['molecules']
+            print(uploaded_file.name)
+            print(uploaded_file.size)
+            
+            path = uploaded_file.temporary_file_path()
+            
+            loadSDF(path)
+            
+    return render(request, 'chemo/sucesso.html')
 
 class IndexView(generic.ListView):
     """
@@ -208,9 +317,18 @@ class cadastroMolView(generic.ListView):
         """
         Get function to the class
         """
-
         return render(request, 'chemo/cadastroMoleculas.html')
 
+class sucessoView(generic.ListView):
+    """
+    Class to work with login.html template
+    """
+
+    def get(self, request, **kwargs):
+        """
+        Get function to the class
+        """
+        return render(request, 'chemo/sucesso.html')
 
 class quimiotecaDatabaseView(generic.ListView):
     """

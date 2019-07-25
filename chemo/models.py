@@ -104,7 +104,7 @@ class Products(models.Model):
         return ', '.join('{}{}'.format(key, val) for key, val in self.__dict__.items())
 
 class Compounds(models.Model):
-    moleculeName = models.CharField(max_length=10) # 2i4x
+    moleculeName = models.CharField(max_length=100) # 2i4x
     totalMolweight = models.FloatField() # 728.794
     cLogP = models.FloatField() # 2.8511
     cLogS = models.FloatField() # -5.343
@@ -123,7 +123,6 @@ class Compounds(models.Model):
     inChIKey = models.CharField(max_length=1000) # FCLYPCIMVVLLRN-LUKCZKMGSA-N
     provider = models.CharField(max_length=100, default='unkown') # nome do lab
     numAtoms = models.IntegerField() # 50
-    molName = models.CharField(max_length=120) 
 
 class Molecules(models.Model):
     moleculeID = models.AutoField(primary_key=True)

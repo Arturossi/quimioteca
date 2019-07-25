@@ -15,11 +15,12 @@ urlpatterns = [
     path('quimiotecaDatabase', views.quimiotecaDatabaseView.as_view(),
          name='quimiotecaDatabase'),
     path('cadastroMoleculas', views.cadastroMolView.as_view(), name='cadastroMoleculas'),
+    path('sucesso', views.sucessoView.as_view(), name='sucesso'),
 ]
 
 noviewsurls = [
     path('updateDatabase', views.feedDatabase, name='updateDatabase'),
-    #path('', 
+    path('uploadMolecule', views.uploadMolecule, name='uploadMolecule'),
 ]
 
 urlpatterns = urlpatterns + noviewsurls
