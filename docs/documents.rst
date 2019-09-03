@@ -15,7 +15,7 @@ Pré-requisitos
 
 * Bibliotecas necessárias
     * git
-    * Conda
+    * Conda ou Miniconda
     * postgresql
     * postgresql-contrib
 
@@ -37,7 +37,7 @@ Então se instala o postgreesql e o git
 
 .. code-block:: console
 
-    sudo apt install -y postgresql postgresql-contrib
+    sudo apt install -y postgresql postgresql-contrib libxrender-dev
 
 
 No CentOS
@@ -52,23 +52,23 @@ Primeiramente deve-se atualizar as informações dos pacotes
 Então se instala o postgreesql e o git
 .. code-block:: console
 
-    sudo yum install -y postgresql-server postgresql-contrib git
+    sudo yum install -y postgresql-server postgresql-contrib git libxrender-dev
 
 
 Esses passos são comuns para ambos sistemas
 -------------------------------------------
 
-Baixe o conda (atenção para o link de download, use o mais recente)
+Baixe o Miniconda (atenção para o link de download, use o mais recente)
 
 .. code-block:: console
 
-    wget -P /tmp/ https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
+    wget -P /tmp/ https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
 Execute o instalador
 
 .. code-block:: console
 
-    sudo chmod 755 /tmp/Anaconda3-2019.03-Linux-x86_64.sh && /tmp/Anaconda3-2019.03-Linux-x86_64.sh
+    sudo chmod 755 /tmp/Miniconda3-latest-Linux-x86_64.sh && /tmp/Miniconda3-latest-Linux-x86_64.sh
 
 Crie a base de dados, o usuário e dê privilégios a ele na base criada (a criação é feita pelo usuário que o postgree cria "postgres")
 
