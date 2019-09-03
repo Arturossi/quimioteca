@@ -7,7 +7,7 @@ dependencies:
   - _libgcc_mutex=0.1=main
   - blas=1.0=mkl
   - bzip2=1.0.8=h7b6447c_0
-  - ca-certificates=2019.6.16=hecc5488_0
+  - ca-certificates=2019.5.15=1
   - cairo=1.14.12=h8948797_3
   - certifi=2019.6.16=py37_1
   - django=2.2.1=py37_0
