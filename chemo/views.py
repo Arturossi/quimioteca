@@ -35,15 +35,15 @@ logger = logging.getLogger(__name__)
 def loadSDF(sdfPath):
     # Create images
     #generateImages(sdfPath)
-    
+     
     # Create a molecule supplier
     suppl = Chem.SDMolSupplier(sdfPath)
     
     # Filter empty entries
-    #sdf = [x for x in suppl if x is not None]
+    sdf = [x for x in suppl if x is not None]
     
     # For each molecule in supplier
-    for mol in suppl:
+    for mol in sdf:
         data = {}
         
         try:
@@ -166,27 +166,28 @@ def loadSDF(sdfPath):
         
         feedDatabase(data)
 
-        '''
-        if Entry.objects.filter(inChIKey=data['inchiKey']).exists():
-            if not Entry.objects.filter(provider=lprovider).exists():
-                #feedDatabase(data)
+        if Compounds.objects.filter(inChIKey=data['inchiKey']).exists():
+            if not Compounds.objects.filter(provider=['provider']).exists():
+                feedDatabase(data)
+                print("feed1")
                 # append no sdf da base de dados
                 a = 1
             else:
+                print("continue123")
                 continue
                 
         else:
             a = 1
-            #feedDatabase(data)
-            '''
+            feedDatabase(data)
+            print("feed2")
         '''except:
             print("Molecule not processed")
             continue'''
 
 def feedDatabase(data):
     # append no sdf da base de dados
-    #try: # Try to parse (this avoid those badly filled entries e.g.: half empties)
-    obj, created = Compounds.objects.get_or_create(
+    try: # Try to parse (this avoid those badly filled entries e.g.: half empties)
+        obj, created = Compounds.objects.get_or_create(
             moleculeName=data['name'].strip(),
             totalMolweight=float(data['molMass']),
             cLogP=float(data['cLogP']),
@@ -207,10 +208,9 @@ def feedDatabase(data):
             provider = data['provider'].strip(),
             numAtoms = int(data['numAtoms']),
         ) # Try to fetch elements, if fails insert elements into database (make database unique)
-    print("ok")
-    '''except:
+    except:
         logger.warn("The molecule " + data['name'].strip() +
-                    " is experiencig some problems, skipping it.") # Show a warning'''
+                    " is experiencig some problems, skipping it.") # Show a warning
 
 def updateCountries():
     '''
@@ -232,13 +232,13 @@ def updateCountries():
 def uploadMolecule(request):
     if request.method == 'POST':
         print(request)
-        uploaded_file = request.FILES['file']
+        uploaded_file = request.FILES['molecules']
         print(uploaded_file.name)
         print(uploaded_file.size)
         
         path = uploaded_file.temporary_file_path()
         
-        #loadSDF(path)
+        loadSDF(path)
         return render(request, 'chemo/sucesso.html')
     else:
     	return render(request, 'chemo/index.html')

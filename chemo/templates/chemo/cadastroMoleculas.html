@@ -1,6 +1,6 @@
 {% extends "chemo/base.html" %}
 
-{% load staticfiles %}
+{% load static %}
 
 {% block content %}
 <style>
@@ -38,7 +38,7 @@
           <div class="d-inline-flex p-1">
               <form method="post" enctype="multipart/form-data" action="{% url 'chemo:uploadMolecule' %}">
                   {% csrf_token %}
-                  {{ form.file }}
+                  {{ form.molecules }}
                   <input type="submit" value="Upload">
               </form>
             </div>
