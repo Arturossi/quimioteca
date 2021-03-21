@@ -4,7 +4,7 @@
 
 {% block content %}
 <style>
-            .btn-file {
+.btn-file {
     position: relative;
     overflow: hidden;
 }
@@ -25,32 +25,22 @@
     display: block;
 }
 </style>
-  <div class="py-5 text-center" style="margin-top: 50px;">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h1 class="mb-3">Cadastro de Moléculas</h1>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="exampleFormControlFile1" class="text-center">Escolha um arquivo .SDF para realizar o cadastro de moléculas.</label>
-            </div>
-            <div class="d-inline-flex p-1">
-                <form method="post" enctype="multipart/form-data" action="uploadMolecule">
-                    {% csrf_token %}
-                    <div class="input-group">
-                        <label class="input-group-btn">
-                            <span class="btn btn-dark">
-                                Escolha o arquivo&hellip; <input type="file" name="molecules" style="display: none;" accept=".sdf">
-                            </span>
-                        </label>
-                        <input type="text" class="form-control" readonly>
-                        &nbsp;
-                        <input id='uploadBtn' class="btn btn-success" style="height: 100%;" type="submit" value="Upload">
-                    </div>
-                    
-                    <div id="uploadBtnDiv" ></div>
-                </form>
+<div class="py-5 text-center" style="margin-top: 50px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="mb-3">Cadastro de Moléculas</h1>
+      </div>
+      <div class="col-md-12">
+          <div class="form-group">
+              <label for="exampleFormControlFile1" class="text-center">Escolha um arquivo .SDF para realizar o cadastro de moléculas.</label>
+          </div>
+          <div class="d-inline-flex p-1">
+              <form method="post" enctype="multipart/form-data" action="{% url 'chemo:uploadMolecule' %}">
+                  {% csrf_token %}
+                  {{ form.file }}
+                  <input type="submit" value="Upload">
+              </form>
             </div>
         </div>
       </div>

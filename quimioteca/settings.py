@@ -67,8 +67,12 @@ TEMPLATES = [
 ]
                         
 FILE_UPLOAD_HANDLERS = [
+    "django.core.files.uploadhandler.MemoryFileUploadHandler",
     "django.core.files.uploadhandler.TemporaryFileUploadHandler"
 ]
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 100
+FILE_UPLOAD_TEMP_DIR = '/tmp'
 
 WSGI_APPLICATION = 'quimioteca.wsgi.application'
 

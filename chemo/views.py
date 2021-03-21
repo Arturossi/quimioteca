@@ -15,6 +15,9 @@ from rdkit.Chem import rdMolDescriptors
 # Model import
 from chemo.models import *
 
+# Form import
+from chemo.forms import *
+
 # General imports
 import os
 import json
@@ -209,7 +212,6 @@ def feedDatabase(data):
         logger.warn("The molecule " + data['name'].strip() +
                     " is experiencig some problems, skipping it.") # Show a warning'''
 
-
 def updateCountries():
     '''
         Update the Countries table in database from file in 'database/countries/countries.csv' path
@@ -227,18 +229,21 @@ def updateCountries():
             continentName=row['Continent'].strip(),
         )
         
-        
 def uploadMolecule(request):
     if request.method == 'POST':
-            uploaded_file = request.FILES['molecules']
-            print(uploaded_file.name)
-            print(uploaded_file.size)
+        print(request)
+        uploaded_file = request.FILES['file']
+        print(uploaded_file.name)
+        print(uploaded_file.size)
+        
+        path = uploaded_file.temporary_file_path()
+        
+        #loadSDF(path)
+        return render(request, 'chemo/sucesso.html')
+    else:
+    	return render(request, 'chemo/index.html')
             
-            path = uploaded_file.temporary_file_path()
-            
-            loadSDF(path)
-            
-    return render(request, 'chemo/sucesso.html')
+    return render(request, 'chemo/index.html')
 
 class IndexView(generic.ListView):
     """
@@ -255,7 +260,6 @@ class IndexView(generic.ListView):
         # Render page index.html within the request and variables
         return render(request, 'chemo/index.html', {'countries': updateCountries()})
 
-
 class compoundView(generic.ListView):
     """
     Class to work with compound.html template
@@ -267,7 +271,6 @@ class compoundView(generic.ListView):
         """
 
         return render(request, 'chemo/compound.html')
-
 
 class aboutView(generic.ListView):
     """
@@ -281,7 +284,6 @@ class aboutView(generic.ListView):
 
         return render(request, 'chemo/about.html')
 
-
 class contactUsView(generic.ListView):
     """
     Class to work with contactUs.html template
@@ -293,7 +295,6 @@ class contactUsView(generic.ListView):
         """
 
         return render(request, 'chemo/contactUs.html')
-
 
 class loginView(generic.ListView):
     """
@@ -307,7 +308,6 @@ class loginView(generic.ListView):
 
         return render(request, 'chemo/login.html')
 
-
 class cadastroMolView(generic.ListView):
     """
     Class to work with login.html template
@@ -317,7 +317,10 @@ class cadastroMolView(generic.ListView):
         """
         Get function to the class
         """
-        return render(request, 'chemo/cadastroMoleculas.html')
+        context = {
+           "form": UploadFileForm(),
+        }
+        return render(request, 'chemo/cadastroMoleculas.html', context)
 
 class sucessoView(generic.ListView):
     """

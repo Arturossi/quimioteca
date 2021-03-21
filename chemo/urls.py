@@ -1,26 +1,26 @@
 from django.urls import path
 
-from . import views
+from .views import *
 
 app_name = 'chemo'
 
 # Patterns which leads to a page
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='home'),
-    path('index', views.IndexView.as_view(), name='index'),
-    path('compound', views.compoundView.as_view(), name='compound'),
-    path('about', views.aboutView.as_view(), name='abnout'),
-    path('contactUs', views.contactUsView.as_view(), name='contactUs'),
-    path('login', views.loginView.as_view(), name='login'),
-    path('quimiotecaDatabase', views.quimiotecaDatabaseView.as_view(),
+    path('', IndexView.as_view(), name='home'),
+    path('index', IndexView.as_view(), name='index'),
+    path('compound', compoundView.as_view(), name='compound'),
+    path('about', aboutView.as_view(), name='abnout'),
+    path('contactUs', contactUsView.as_view(), name='contactUs'),
+    path('login', loginView.as_view(), name='login'),
+    path('quimiotecaDatabase', quimiotecaDatabaseView.as_view(),
          name='quimiotecaDatabase'),
-    path('cadastroMoleculas', views.cadastroMolView.as_view(), name='cadastroMoleculas'),
-    path('sucesso', views.sucessoView.as_view(), name='sucesso'),
+    path('cadastroMoleculas', cadastroMolView.as_view(), name='cadastroMoleculas'),
+    path('sucesso', sucessoView.as_view(), name='sucesso'),
 ]
 
 noviewsurls = [
-    path('updateDatabase', views.feedDatabase, name='updateDatabase'),
-    path('uploadMolecule', views.uploadMolecule, name='uploadMolecule'),
+    path('updateDatabase', feedDatabase, name='updateDatabase'),
+    path('uploadMolecule', uploadMolecule, name='uploadMolecule'),
 ]
 
 urlpatterns = urlpatterns + noviewsurls
